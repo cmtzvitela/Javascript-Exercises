@@ -4,7 +4,7 @@ function multiplyToBase13(num1, num2) {
     console.log(lessThan13(result));
   } else {
     if (result <= -13) {
-      const absoluteResult = (result);
+      const absoluteResult = result;
       console.log("-", transformToBase13(absoluteResult));
     } else {
       return transformToBase13(result);
@@ -37,7 +37,7 @@ function workingOn13(num) {
     remainder = quotient % 13;
     transformedRemainder = lessThan13(remainder);
     base13 = transformedRemainder + base13;
-    console.log("🚀 ~ file: Question01.js ~ line 34 ~ workingOn13 ~ base13", base13);
+    console.log("The result in base 13 is", base13);
 
     return base13;
   } else {
@@ -71,7 +71,7 @@ function lessThan13(num) {
   }
 }
 
-multiplyToBase13(-6, 89);
+multiplyToBase13(5, 1739);
 //transformToBase13(8695);
 
 // remainder = num % 13;
