@@ -18,10 +18,11 @@ function objBoolKeys(object, boolean) {
       return object[key] === boolean;
     });
     console.log(keyArray);
-  } else if (object) {
+  } else {
     console.log(Object.keys(obj));
   }
 }
 
 objBoolKeys(obj, true);
 objBoolKeys(obj, false);
+objBoolKeys(obj);
