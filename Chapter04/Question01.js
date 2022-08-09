@@ -13,3 +13,4 @@ function getSequence(num) {
 }
 
 getSequence(15);
+console.log(fibonacci(5));
