@@ -25,6 +25,25 @@ class Quadrilateral extends Shape {
   fnPerimeter() {
     let perimeter = this.side1 + this.side2 + this.side3 + this.side4;
     console.log(`The perimeter is ${perimeter}`);
+    return perimeter;
+  }
+}
+
+class Square extends Quadrilateral {
+  constructor(pEdges, name, side) {
+    super(pEdges);
+    this.name = name;
+    this.side = side;
+  }
+  fnPerimeter() {
+    let perimeter = this.side * 4;
+    console.log(`The perimeter is ${perimeter}`);
+  }
+  fnArea() {
+    let area = 0;
+    area = this.side * this.side * 1.0;
+    console.log(`The area is ${area}`);
+    return area;
   }
 }
 
@@ -47,21 +66,24 @@ class Triangle extends Shape {
   fnPerimeter() {
     let perimeter = this.side1 + this.side2 + this.side3;
     console.log(`The perimeter is ${perimeter}`);
+    return perimeter;
   }
 }
 
-square = new Quadrilateral(4, "shape1", 5, 5, 5, 5);
-console.log("🚀 ~ file: Question01.js ~ line 29 ~ square", square);
+let square = new Square(4, "square1", 7);
 square.fnArea();
 square.fnPerimeter();
 square.display();
 
-trian = new Triangle(3, "shape2", 6, 5, 4);
-console.log("🚀 ~ file: Question01.js ~ line 58 ~ trian", trian);
+let trian = new Triangle(3, "shape2", 6, 5, 4);
 trian.fnArea();
 trian.fnPerimeter();
 trian.display();
 
+let rectangle = new Quadrilateral(4, "rec1", 3, 4, 3, 4);
+rectangle.fnArea();
+rectangle.fnPerimeter();
+rectangle.display();
 class Organism {
   constructor(name) {
     this.name = name;
@@ -95,12 +117,12 @@ class Human extends Mammal {
   }
 }
 
-animal = new Mammal("tiger", 4, "carnivorous");
+let animal = new Mammal("tiger", 4, "carnivorous");
 console.log("🚀 ~ file: Question01.js ~ line 90 ~ animal", animal);
 
 animal.introduction();
 animal.eatingHabits();
 animal.walking();
 
-being = new Human("Peter", 2, "omnivorous", "policeman");
+let being = new Human("Peter", 2, "omnivorous", "policeman");
 being.working();
