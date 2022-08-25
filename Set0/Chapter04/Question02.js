@@ -6,6 +6,6 @@ function addRec(arr) {
   }
 }
 
-let arr = [1, 4, 6, 7, 48];
-let sum = addRec(arr);
+let numberArray = [1, 4, 6, 7, 48];
+let sum = addRec(numberArray);
 console.log("🚀 ~ file: Question02.js ~ line 11 ~ sum", sum);
