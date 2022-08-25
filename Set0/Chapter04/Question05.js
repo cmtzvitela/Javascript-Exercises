@@ -1,17 +1,5 @@
 function distance(...coordinates) {
   switch (coordinates.length) {
-    case 0:
-      console.log("You need at least four arguments");
-      break;
-    case 1:
-      console.log("You need at least four arguments");
-      break;
-    case 2:
-      console.log("You need at least four arguments");
-      break;
-    case 3:
-      console.log("You need at least four arguments");
-      break;
     case 4:
       function distance2Points() {
         let dist = 0;
@@ -20,9 +8,6 @@ function distance(...coordinates) {
         return dist;
       }
       distance2Points();
-      break;
-    case 5:
-      console.log("Invalid number of arguments, submit four or six arguments");
       break;
     case 6:
       function distance3Points() {
@@ -33,10 +18,8 @@ function distance(...coordinates) {
       }
       distance3Points();
       break;
-    case 7:
-      console.log("Invalid number of arguments, submit four or six arguments");
-      break;
     default:
+      console.error("Invalid number of arguments, submit four or six arguments");
       break;
   }
 }
@@ -51,3 +34,4 @@ var x2 = 2,
   z2 = 4;
 var delta1 = distance(x1, y1, x2, y2); // delta = 1
 var delta2 = distance(x1, y1, z1, x2, y2, z2); // delta = 3.1622…
+var delta3 = distance(x1, y1, x2, y2, z1);
