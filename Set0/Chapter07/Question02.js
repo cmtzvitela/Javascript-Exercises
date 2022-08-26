@@ -12,11 +12,11 @@ function changeDateFormat(date) {
   if (monthDay in germanHolidays === false) {
     return;
   } else {
-    return [
-      `US date format: ${date}`,
-      `Germany date format: ${formattedDate}`,
-      `That is the German Holiday: ${germanHolidays[monthDay]}`,
-    ];
+    return {
+      usFormat: `US date format: ${date}`,
+      germanyFormat: `Germany date format: ${formattedDate}`,
+      holiday: `That is the German Holiday: ${germanHolidays[monthDay]}`,
+    };
   }
 }
 
