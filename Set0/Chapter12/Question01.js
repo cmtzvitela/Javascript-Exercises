@@ -1,9 +1,12 @@
-function printAttr(element, name) {
+const element = document.querySelector("div");
+
+function printAttr(el, name) {
+  let attributeArray = [];
   for (let i = 0; i < name.length; i++) {
-    const el = document.querySelector(element);
     let attributeValue = el.getAttribute(name[i]);
-    console.log(attributeValue);
+    attributeArray.push(attributeValue);
   }
+  return attributeArray;
 }
 
-printAttr("div", ["id", "class", "style", "val"]);
+console.log(printAttr(element, ["id", "class", "style", "val"]));
