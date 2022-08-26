@@ -48,31 +48,29 @@ var myLib = {
   },
 };
 
-var answer = myLib.math.real.sub(myLib.math.real.add(20, 22), myLib.math.real.mul(2, 5));
+var answer1 = myLib.math.real.sub(myLib.math.real.add(20, 22), myLib.math.real.mul(2, 5));
 
-var ans = myLib.math.matrix.times(
+var ans2 = myLib.math.matrix.times(
   myLib.math.matrix.eye(4),
   myLib.math.complex.sub(new myLib.math.complex.Num(myLib.math.real.add(5, 2), -3), new myLib.math.complex.Num(3, 4))
 );
 
 //With 'with' statement
 with (myLib.math.real) {
-  var answer = sub(add(20, 22), mul(2, 5));
+  var answer3 = sub(add(20, 22), mul(2, 5));
 }
 
 with (myLib.math) {
-  var ans = matrix.times(matrix.eye(4), complex.sub(new complex.Num(real.add(5, 2), -3), new complex.Num(3, 4)));
+  var ans4 = matrix.times(matrix.eye(4), complex.sub(new complex.Num(real.add(5, 2), -3), new complex.Num(3, 4)));
 }
 
 //Without 'with' statement
 let path = myLib.math.real;
-var answer = [path].sub([path].add(20, 22), [path].mul(2, 5));
+var answer5 = path.sub(path.add(20, 22), path.mul(2, 5));
+console.log("🚀 ~ file: Question01.js ~ line 70 ~ answer", answer5);
 
 let secondPath = myLib.math;
-var ans = [secondPath].matrix.times(
-  [secondPath].matrix.eye(4),
-  [secondPath].complex.sub(
-    new [secondPath].complex.Num([secondPath].real.add(5, 2), -3),
-    new [secondPath].complex.Num(3, 4)
-  )
+var ans6 = secondPath.matrix.times(
+  secondPath.matrix.eye(4),
+  secondPath.complex.sub(new secondPath.complex.Num(secondPath.real.add(5, 2), -3), new secondPath.complex.Num(3, 4))
 );

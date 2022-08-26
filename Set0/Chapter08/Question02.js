@@ -22,7 +22,6 @@ setInterval(printSentences, 1000);
 
 function printSentences() {
   const timeElapsed = Date.now() - start;
-  console.log(timeElapsed);
   if (timeElapsed % 30000 < 999 && timeElapsed % 60000 < 999 && timeElapsed % 75000 < 999) {
     thisIsA();
     thisIsB();
