@@ -5,7 +5,7 @@ function generateTable() {
     const deleteTable = document.getElementById("generated-table");
     deleteTable.remove();
   }
-  //Taking the values from user input and creatinf a div to contain the table
+  //Taking the values from user input and creating a div to contain the table
   const numberOfRows = document.getElementById("row-number").value;
   const numberOfColumns = document.getElementById("column-number").value;
   const tableSpace = document.getElementById("table-space");
@@ -21,8 +21,3 @@ function generateTable() {
     }
   }
 }
-
-// function deleteTable() {
-//   const deleteTable = document.getElementById("generated-table");
-//   deleteTable.remove();
-// }

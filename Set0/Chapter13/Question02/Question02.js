@@ -1,6 +1,7 @@
 const button = document.querySelector("button");
 const button2 = document.getElementById("reset");
 const meter = document.querySelector("meter");
+
 let amountOfClicks = 0;
 
 button.addEventListener("click", (event) => {
@@ -8,7 +9,7 @@ button.addEventListener("click", (event) => {
   meter.value = amountOfClicks;
   if (amountOfClicks <= 2) {
     button.textContent = `Click count: ${amountOfClicks}`;
-  } else if (amountOfClicks == 3) {
+  } else if (amountOfClicks === 3) {
     button.textContent = `Click count: ${amountOfClicks}`;
     button.classList.add("offbutton");
   }
