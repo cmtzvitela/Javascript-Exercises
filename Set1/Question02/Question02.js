@@ -1,21 +1,20 @@
-let functionCalls = 0;
+function sum(...args) {
+  let initialValue = 0;
+  return args.reduce((previousValue, currentValue) => previousValue + currentValue, initialValue);
+}
 
-function limitedFunction(fn, calls) {
-  if (functionCalls < calls) {
-    while (functionCalls < calls) {
-      fn(functionCalls);
-      functionCalls++;
+function limitFunction(fn, calls) {
+  let innerCount = 1;
+  return function (...arg) {
+    if (innerCount <= calls) {
+      innerCount++;
+      return fn(...arg);
     }
-    return;
-  }
-  console.log("You have reached the limit");
+  };
 }
 
-function numberOfCalls(functionCalls) {
-  console.log(`Call number ${functionCalls + 1}`);
-}
-
-limitedFunction(numberOfCalls, 4);
-limitedFunction();
-limitedFunction();
-limitedFunction();
+const limited = limitFunction(sum, 3);
+console.log(limited(3, 5));
+console.log(limited(2, 9, 13));
+console.log(limited(6, 7, 1, 5));
+console.log(limited());
