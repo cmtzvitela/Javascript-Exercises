@@ -1,32 +1,16 @@
-const wordArray = ["cat", "Egg", "glass", "zoom", "library"];
+const wordArray = ["Egg", "cat", "glass", "zoom", "library"];
 const wordArray2 = ["Aa", "B", "Ccc", "Dddd", "Eeeee"];
 
-function sorting(sortingMethod) {
+function sorting(sortingMethod, array) {
   switch (sortingMethod) {
     case "ascending":
-      let newWordArray = [];
-      wordArray.forEach((element) => {
-        newWordArray.push(element.toLowerCase());
-        console.log("🚀 ~ file: Question01.js ~ line 9 ~ wordArray.forEach ~ newWordArray", newWordArray);
-        return newWordArray;
-      });
-      newWordArray.sort();
-      console.log(newWordArray);
+      return array.sort(compareUnicodeAscending);
       break;
     case "descending":
-      wordArray.sort(function (a, b) {
-        if (a > b) {
-          return -1;
-        }
-        if (b > a) {
-          return 1;
-        }
-        return 0;
-      });
-      console.log(wordArray);
+      return array.sort(compareUnicodeDescending);
       break;
     case "lenghtAscending":
-      wordArray.sort(function (a, b) {
+      array.sort(function (a, b) {
         if (a.length > b.length) {
           return 1;
         }
@@ -35,10 +19,10 @@ function sorting(sortingMethod) {
         }
         return 0;
       });
-      console.log(wordArray);
+      return array;
       break;
     case "lenghtDescending":
-      wordArray.sort(function (a, b) {
+      array.sort(function (a, b) {
         if (a.length > b.length) {
           return -1;
         }
@@ -47,10 +31,10 @@ function sorting(sortingMethod) {
         }
         return 0;
       });
-      console.log(wordArray);
+      return array;
       break;
     case "consonantAscending":
-      wordArray.sort(function (a, b) {
+      array.sort(function (a, b) {
         if (consonants(a) > consonants(b)) {
           return 1;
         }
@@ -59,10 +43,10 @@ function sorting(sortingMethod) {
         }
         return 0;
       });
-      console.log(wordArray);
+      return array;
       break;
     case "consonantDescending":
-      wordArray.sort(function (a, b) {
+      array.sort(function (a, b) {
         if (consonants(a) > consonants(b)) {
           return -1;
         }
@@ -71,30 +55,49 @@ function sorting(sortingMethod) {
         }
         return 0;
       });
-      console.log(wordArray);
+      return array;
       break;
     default:
-      wordArray.sort();
-      console.log(wordArray);
+      array.sort();
+      array;
       break;
   }
 }
 
-sorting("ascending");
-sorting("descending");
-sorting("lenghtDescending");
-sorting("lenghtAscending");
-sorting("consonantAscending");
-sorting("consonantDescending");
-sorting();
+console.log(sorting("ascending", wordArray));
+console.log(sorting("descending", wordArray2));
+console.log(sorting("lenghtDescending", wordArray2));
+console.log(sorting("lenghtAscending", wordArray));
+console.log(sorting("consonantAscending", wordArray2));
+console.log(sorting("consonantDescending", wordArray));
 
 function consonants(str) {
   var countConsonants = 0;
 
   for (var i = 0; i < str.length; i++) {
-    if (str[i] !== "a" && str[i] !== "e" && str[i] !== "i" && str[i] !== "o" && str[i] !== "u" && str[i] !== " ") {
+    if (
+      str[i] !== "a" &&
+      str[i] !== "e" &&
+      str[i] !== "i" &&
+      str[i] !== "o" &&
+      str[i] !== "u" &&
+      str[i] !== " " &&
+      str[i] !== "A" &&
+      str[i] !== "E" &&
+      str[i] !== "I" &&
+      str[i] !== "O" &&
+      str[i] !== "U"
+    ) {
       countConsonants++;
     }
   }
   return countConsonants;
+}
+
+function compareUnicodeAscending(a, b) {
+  return a.toLowerCase().charCodeAt() - b.toLowerCase().charCodeAt();
+}
+
+function compareUnicodeDescending(a, b) {
+  return b.toLowerCase().charCodeAt() - a.toLowerCase().charCodeAt();
 }
