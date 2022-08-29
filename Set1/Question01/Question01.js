@@ -1,10 +1,17 @@
-const wordArray = ["cat", "egg", "glass", "zoom", "library"];
+const wordArray = ["cat", "Egg", "glass", "zoom", "library"];
+const wordArray2 = ["Aa", "B", "Ccc", "Dddd", "Eeeee"];
 
 function sorting(sortingMethod) {
   switch (sortingMethod) {
     case "ascending":
-      wordArray.sort();
-      console.log(wordArray);
+      let newWordArray = [];
+      wordArray.forEach((element) => {
+        newWordArray.push(element.toLowerCase());
+        console.log("🚀 ~ file: Question01.js ~ line 9 ~ wordArray.forEach ~ newWordArray", newWordArray);
+        return newWordArray;
+      });
+      newWordArray.sort();
+      console.log(newWordArray);
       break;
     case "descending":
       wordArray.sort(function (a, b) {

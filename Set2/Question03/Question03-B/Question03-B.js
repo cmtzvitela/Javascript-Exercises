@@ -15,11 +15,10 @@ textContainer.appendChild(text);
 
 function handleClick() {
   const userString = document.getElementById("input-hashtag").value;
-  const newText = paragraph.replaceAll(userString, createHashtag(userString));
-  let newerText = new DOMParser().parseFromString(newText, "text/html");
-  console.log("🚀 ~ file: Question03-B.js ~ line 20 ~ handleClick ~ newerText", newerText);
+  const addHashtags = paragraph.replaceAll(userString, createHashtag(userString));
+  let modifiedParagraph = new DOMParser().parseFromString(addHashtags, "text/html");
   let p = document.createElement("p");
-  p = newerText.body;
+  p = modifiedParagraph.body;
   p.style.margin = "0px";
   const textContainer = document.getElementById("text");
   textContainer.removeChild(textContainer.firstChild);

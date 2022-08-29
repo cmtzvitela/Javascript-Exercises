@@ -2,9 +2,24 @@
 const str1 = `September 29, 1972`;
 const str2 = `may 65, 8951`;
 const str3 = `May 65, 8951`;
-console.log(str1.match(/[A-Z]{1}[a-zA-Z]+\s[0-9]{2}\,\s[0-9]{4}/));
-console.log(str2.match(/[A-Z]{1}[a-zA-Z]+\s[0-9]{2}\,\s[0-9]{4}/));
-console.log(str3.match(/[A-Z]{1}[a-zA-Z]+\s[0-9]{2}\,\s[0-9]{4}/));
+// console.log(str1.match(/[A-Z]{1}[a-zA-Z]+\s[0-9]{2}\,\s[0-9]{4}/));
+// console.log(str2.match(/[A-Z]{1}[a-zA-Z]+\s[0-9]{2}\,\s[0-9]{4}/));
+// console.log(str3.match(/[A-Z]{1}[a-zA-Z]+\s[0-9]{2}\,\s[0-9]{4}/));
+console.log(
+  str1.match(
+    /(January|February|March|April|May|June|July|August|September|October|November|December)\s[0-9]{2}\,\s[0-9]{4}/
+  )
+);
+console.log(
+  str2.match(
+    /(January|February|March|April|May|June|July|August|September|October|November|December)\s[0-9]{2}\,\s[0-9]{4}/
+  )
+);
+console.log(
+  str3.match(
+    /(January|February|March|April|May|June|July|August|September|October|November|December)\s[0-9]{2}\,\s[0-9]{4}/
+  )
+);
 
 //B
 const str4 = `A52`;
