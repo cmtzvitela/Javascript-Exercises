@@ -1,20 +1,19 @@
 const vowels = ["a", "e", "i", "o", "u"];
 
-function countVowelOrDigits(something) {
+function countVowelOrDigits(argument) {
   let count = 0;
-  if (typeof something == "string") {
-    for (let letter of something.toLowerCase()) {
+  if (typeof argument == "string") {
+    for (let letter of argument.toLowerCase()) {
       if (vowels.includes(letter)) {
         count++;
       }
     }
-
-    console.log(count);
+    return count;
   }
-  if (typeof something == "number") {
-    console.log(Math.ceil(Math.log10(something)));
+  if (typeof argument == "number") {
+    return Math.ceil(Math.log10(argument));
   }
 }
 
-countVowelOrDigits(25632);
-countVowelOrDigits("hypotenuse");
+console.log(countVowelOrDigits(25632));
+console.log(countVowelOrDigits("hypotenuse"));
