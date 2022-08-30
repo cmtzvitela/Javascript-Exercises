@@ -9,8 +9,8 @@ function generateTable() {
   const numberOfRows = document.getElementById("row-number").value;
   const numberOfColumns = document.getElementById("column-number").value;
   const tableSpace = document.getElementById("table-space");
+  const tableRender = document.createDocumentFragment();
   const tableHolder = document.createElement("div");
-  tableSpace.appendChild(tableHolder);
   tableHolder.setAttribute("id", "generated-table");
   //Create rows and columns accordingly
   for (let rows = 0; rows < numberOfRows; rows++) {
@@ -20,4 +20,6 @@ function generateTable() {
       tableRow.appendChild(document.createElement("td"));
     }
   }
+  tableRender.appendChild(tableHolder);
+  tableSpace.appendChild(tableRender);
 }
