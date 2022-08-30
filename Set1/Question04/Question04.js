@@ -9,15 +9,35 @@ const objB = {
   hobby: "painting",
 };
 
-function copyObj(obj1, obj2, propertyArray) {
+function copy(obj1, obj2, propertyArray) {
   if (obj1 && obj2 && propertyArray) {
-    const obj3 = Object.assign(obj1, obj2);
-    const obj4 = propertyArray.filter((key) => key in obj3).reduce((obj2, key) => ((obj2[key] = obj3[key]), obj2), {});
-    return obj4;
+    //If an array of properties is provided, it will reduce the object to only have only the asked components
+    return Object.keys(obj2).reduce((target, k) => {
+      if (propertyArray.indexOf(k) > -1) {
+        target[k] = obj2[k];
+      }
+      //And then assing them to the other object
+      return Object.assign(target, obj1);
+    }, {});
   } else if (obj1 && obj2) {
-    const obj3 = Object.assign(obj1, obj2);
-    return obj3;
+    //If an array is not provided, it will just put the objects together
+    const obj = Object.assign(obj1, obj2);
+    return obj;
   }
 }
+console.log(copy(objA, objB, ["occupation"]));
+console.log(copy(objA, objB));
 
-console.log(copyObj(objA, objB, ["name", "occupation", "hobby"]));
+// function copyObj(obj1, obj2, propertyArray) {
+//   if (obj1 && obj2 && propertyArray) {
+//     let res = Object.keys(obj2).reduce(function (obj, k) {
+//       if ((k = propertyArray)) obj[k] = obj2[k];
+//       return obj;
+//     }, {});
+//     const obj = Object.assign(obj1, res);
+//     return obj;
+//   } else if (obj1 && obj2) {
+//     const obj = Object.assign(obj1, obj2);
+//     return obj;
+//   }
+// }
