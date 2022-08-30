@@ -3,7 +3,6 @@ const button2 = document.getElementById("reset");
 const meter = document.querySelector("meter");
 
 let amountOfClicks = 0;
-
 button.addEventListener("click", (event) => {
   amountOfClicks++;
   meter.value = amountOfClicks;
