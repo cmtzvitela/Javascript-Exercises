@@ -23,13 +23,17 @@ section {
 }
 
 .image {
-  background-repeat: no-repeat;
-  min-height: 240px;
-  min-width: 320px;
   margin-bottom: 20px;
   margin-right: 15px;
+  min-width: 320px;
+  min-height: 240px;
+  background-repeat: round;
 }
-h1 {
+
+.image-container {
+  counter-reset: css-counter 0;
+}
+h3 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,6 +43,10 @@ h1 {
   height: 50px;
   text-decoration: underline;
   margin-left: 10px;
+  counter-increment: css-counter 1;
+}
+h3::before {
+  content: counter(css-counter);
 }
 .content {
   display: flex;
@@ -48,25 +56,18 @@ h1 {
 article {
   margin-bottom: 30px;
 }
-#first-image {
-  background-image: url(https://loremflickr.com/320/240/dog);
+
+.article-image {
+  max-width: 320px;
+  max-height: 240px;
 }
 
-#second-image {
-  background-image: url(https://loremflickr.com/320/240/tree);
-}
-
-#third-image {
-  background-image: url(https://loremflickr.com/320/240/sunset);
-}
-
-.template-2 {
-  float: left;
-  margin-bottom: 0px;
+.second-template-container {
+  display: contents;
 }
 
 a {
-  color: blue;
-  text-decoration: underline;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
