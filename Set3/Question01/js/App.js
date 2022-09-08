@@ -41,7 +41,8 @@ export default class App {
         const newNote = {
           title: "New Note",
           body: "Take note...",
-          creationDate: new Date().toISOString(),
+          creationDate: 
+          new Date().toISOString(),
         };
 
         NotesAPI.saveNote(newNote);
