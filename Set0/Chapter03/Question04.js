@@ -9,12 +9,11 @@ function createPixelData(numberOfPixels) {
 const colorArray = ["yellow", "green", "red", "blue", "brown", "white", "black", "purple", "pink"];
 
 const data = createPixelData(400);
-console.log("🚀 ~ file: Question04.js ~ line 12 ~ data", data);
 
 function Image(data, height, width, name) {
   this.pixelData = function getPixelData(indexX, indexY) {
     if (indexX > this.width || indexY > this.height) {
-      return `Out of range. Max X = ${this.width} and max Y = ${this.height}`;
+      return console.error(`Out of range. Max X = ${this.width} and max Y = ${this.height}`);
     }
     const index = indexX * this.width + indexY;
     const pixelInfo = data[index];
