@@ -6,7 +6,6 @@ function distance(...coordinates) {
       return distance3Points();
     default:
       return "Invalid number of arguments, submit four or six arguments";
-      break;
   }
 }
 
