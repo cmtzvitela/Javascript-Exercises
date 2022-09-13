@@ -1,32 +1,34 @@
 function dataType(...arguments) {
+  let resultString = "";
   arguments.forEach((element) => {
     switch (typeof element) {
       case "string":
-        console.log("string");
+        resultString = resultString + "string, ";
         break;
       case "number":
         if (Number.isInteger(element)) {
-          console.log("integer");
+          resultString = resultString + "integer, ";
           break;
         } else {
-          console.log("float");
+          resultString = resultString + "float, ";
           break;
         }
       case "function":
-        console.log("function");
+        resultString = resultString + "function, ";
         break;
       case "object":
         if (element.length) {
-          console.log("array");
+          resultString = resultString + "array, ";
           break;
         } else if (Object.keys(element)) {
-          console.log("object");
+          resultString = resultString + "object, ";
           break;
         }
       default:
         break;
     }
   });
+  return resultString.replace(/,\s\B/, " ");
 }
 
-dataType(1, 6.2831, "pi*2", [function () {}, 1], {}, function () {});
+console.log(dataType(1, 6.2831, "pi*2", [function () {}, 1], {}, function () {}));
