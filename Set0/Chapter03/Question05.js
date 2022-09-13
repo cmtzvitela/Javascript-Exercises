@@ -9,43 +9,23 @@ CustomObject.prototype.c = function () {
 
 const obj = new CustomObject(1, 2);
 
-function printObjProp(object, onlyBelongs) {
-  if (onlyBelongs == true) {
-    return Object.getOwnPropertyNames(object);
+function printObjProp(obj, onlyBelongs) {
+  if (onlyBelongs === true) {
+    console.log(Object.getOwnPropertyNames(obj));
   } else {
-    return Object.getOwnPropertyNames(object).concat(Object.getOwnPropertyNames(object.__proto__));
+    for (const key in obj) {
+      console.log(key);
+    }
   }
 }
+printObjProp(obj);
+printObjProp(obj, true);
+printObjProp(obj, false);
 
-console.log(printObjProp(obj));
-console.log(printObjProp(obj, false));
-console.log(printObjProp(obj, true));
-
-// const obj = {
-//   a: 45,
-//   b: "A String",
-//   c: true,
-//   d: [1, 2, 3],
-//   e: true,
-//   f: false,
-// };
-
-// function objBoolKeys(object, boolean) {
-//   if (object && boolean) {
-//     let keyArray = Object.keys(object).filter(function (key) {
-//       return object[key] === boolean;
-//     });
-//     return keyArray;
-//   } else if (object && !boolean) {
-//     let keyArray = Object.keys(object).filter(function (key) {
-//       return object[key] === boolean;
-//     });
-//     return keyArray;
+// function printObjProp(object, onlyBelongs) {
+//   if (onlyBelongs == true) {
+//     return Object.getOwnPropertyNames(object);
 //   } else {
-//     return Object.keys(obj);
+//     return Object.getOwnPropertyNames(object).concat(Object.getOwnPropertyNames(object.__proto__));
 //   }
 // }
-
-// objBoolKeys(obj, true);
-// objBoolKeys(obj, false);
-// objBoolKeys(obj);
