@@ -1,8 +1,7 @@
 function generateTable() {
   //Checking first if there is a table already, if there is, delete it
-  const deleteTable = !!document.getElementById("generated-table");
-  if (deleteTable == true) {
-    const deleteTable = document.getElementById("generated-table");
+  const deleteTable = document.getElementById("generated-table");
+  if (deleteTable) {
     deleteTable.remove();
   }
   //Taking the values from user input and creating a div to contain the table
