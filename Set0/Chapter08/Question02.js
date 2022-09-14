@@ -9,49 +9,68 @@ function thisIsB() {
 function thisIsC() {
   console.log("Should I give up or should I just keep chasing pavements");
 }
+const sentences = printSentences();
 
-const start = Date.now();
-console.log("The timer has started");
-
-// let timer = setTimeout(function globalTimer() {
-//   printSentences();
-//   setTimeout(globalTimer, 1000);
-// }, 1000);
-
-setInterval(printSentences, 1000);
+setInterval(sentences, 15000);
 
 function printSentences() {
-  const timeElapsed = Date.now() - start;
-  if (timeElapsed % 30000 < 999 && timeElapsed % 60000 < 999 && timeElapsed % 75000 < 999) {
-    thisIsA();
-    thisIsB();
-    thisIsC();
-    return;
-  } else if (timeElapsed % 30000 < 999 && timeElapsed % 60000 < 999) {
-    thisIsA();
-    thisIsB();
-    return;
-  } else if (timeElapsed % 30000 < 999 && timeElapsed % 75000 < 999) {
-    thisIsA();
-    thisIsC();
-    return;
-  } else if (timeElapsed % 60000 < 999 && timeElapsed % 75000 < 999) {
-    thisIsB();
-    thisIsC();
-    return;
-  } else if (timeElapsed % 30000 < 999) {
-    return thisIsA();
-  } else if (timeElapsed % 60000 < 999) {
-    return thisIsB();
-  } else if (timeElapsed % 75000 < 999) {
-    return thisIsC();
-  }
+  let counter = 1;
+  return function incrementCounter() {
+    counter++;
+    if (counter % 2 === 0 && counter % 4 === 0 && counter % 5 === 0) {
+      thisIsA();
+      thisIsB();
+      thisIsC();
+    } else if (counter % 2 === 0 && counter % 4 === 0) {
+      thisIsA();
+      thisIsB();
+    } else if (counter % 2 === 0 && counter % 5 === 0) {
+      thisIsA();
+      thisIsC();
+    } else if (counter % 4 === 0 && counter % 5 === 0) {
+      thisIsB();
+      thisIsC();
+    } else if (counter % 2 === 0) {
+      thisIsA();
+    } else if (counter % 4 === 0) {
+      thisIsB();
+    } else if (counter % 5 === 0) {
+      thisIsC();
+    }
+    console.log(counter);
+    return counter;
+  };
 }
 
-// function globalTimer() {
-//   setInterval(thisIsA, 1000 * 5);
-//   setInterval(thisIsB, 1000 * 7);
-//   setInterval(thisIsC, 1000 * 10);
-// }
+// const start = Date.now();
+// console.log("The timer has started");
 
-// globalTimer();
+// setInterval(printSentences, 1000);
+
+// function printSentences() {
+//   const timeElapsed = Date.now() - start;
+//   if (timeElapsed % 30000 < 999 && timeElapsed % 60000 < 999 && timeElapsed % 75000 < 999) {
+//     thisIsA();
+//     thisIsB();
+//     thisIsC();
+//     return;
+//   } else if (timeElapsed % 30000 < 999 && timeElapsed % 60000 < 999) {
+//     thisIsA();
+//     thisIsB();
+//     return;
+//   } else if (timeElapsed % 30000 < 999 && timeElapsed % 75000 < 999) {
+//     thisIsA();
+//     thisIsC();
+//     return;
+//   } else if (timeElapsed % 60000 < 999 && timeElapsed % 75000 < 999) {
+//     thisIsB();
+//     thisIsC();
+//     return;
+//   } else if (timeElapsed % 30000 < 999) {
+//     return thisIsA();
+//   } else if (timeElapsed % 60000 < 999) {
+//     return thisIsB();
+//   } else if (timeElapsed % 75000 < 999) {
+//     return thisIsC();
+//   }
+// }

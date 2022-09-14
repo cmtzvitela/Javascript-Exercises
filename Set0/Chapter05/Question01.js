@@ -1,10 +1,10 @@
 class Client {
   constructor(name, alias, accountID, ownMoney, balance) {
-    (this.name = name),
-      (this.alias = alias),
-      (this.accountID = accountID),
-      (this.ownMoney = ownMoney),
-      (this.balance = balance);
+    this.name = name,
+      this.alias = alias,
+      this.accountID = accountID,
+      this.ownMoney = ownMoney,
+      this.balance = balance;
   }
   accountInfo(ID) {
     if (ID === this.accountID) {
@@ -14,6 +14,7 @@ class Client {
   }
   viewBalance() {
     return this.balance;
+    
   }
   depositOwn(money) {
     if (money <= this.ownMoney) {
