@@ -69,47 +69,32 @@ defaultFragment.appendChild(title);
 const text = document.createTextNode(columnsText);
 defaultFragment.appendChild(text);
 
-const textSpace = document.getElementsByClassName("text-columns")[0];
+const textSpace = document.getElementById("text-columns");
 textSpace.appendChild(defaultFragment);
 
-const twoColumns = document.getElementsByClassName("2-col")[0];
+const twoColumns = document.getElementById("two");
 twoColumns.addEventListener("click", () => {
-  const fragmentTwoCol = document.createDocumentFragment();
-  const title = document.createElement("h2");
-  title.textContent = titleText;
-  fragmentTwoCol.appendChild(title);
-  const text = document.createTextNode(columnsText);
-  fragmentTwoCol.appendChild(text);
-  const element = document.getElementsByClassName("text-columns")[0];
-  element.style.columnCount = "2";
-  element.removeChild(textSpace);
-  element.appendChild(fragmentTwoCol);
+  appendFragment(twoColumns);
 });
-
-const threeColumns = document.getElementsByClassName("3-col")[0];
+const threeColumns = document.getElementById("three");
 threeColumns.addEventListener("click", () => {
-  const fragmentThreeCol = document.createDocumentFragment();
-  const title = document.createElement("h2");
-  title.textContent = titleText;
-  fragmentThreeCol.appendChild(title);
-  const text = document.createTextNode(columnsText);
-  fragmentThreeCol.appendChild(text);
-  const element = document.getElementsByClassName("text-columns")[0];
-  element.style.columnCount = "3";
-  element.removeChild(textSpace);
-  element.appendChild(fragmentThreeCol);
+  appendFragment(threeColumns);
 });
 
-const fourColumns = document.getElementsByClassName("4-col")[0];
+const fourColumns = document.getElementById("four");
 fourColumns.addEventListener("click", () => {
-  const fragmentFourCol = document.createDocumentFragment();
+  appendFragment(fourColumns);
+});
+
+function appendFragment(el) {
+  const fragment = document.createDocumentFragment();
   const title = document.createElement("h2");
   title.textContent = titleText;
-  fragmentFourCol.appendChild(title);
+  fragment.appendChild(title);
   const text = document.createTextNode(columnsText);
-  fragmentFourCol.appendChild(text);
-  const element = document.getElementsByClassName("text-columns")[0];
-  element.style.columnCount = "4";
+  fragment.appendChild(text);
+  const element = document.getElementById("text-columns");
+  element.style.columnCount = el.value;
   element.removeChild(textSpace);
-  element.appendChild(fragmentFourCol);
-});
+  element.appendChild(fragment);
+}
