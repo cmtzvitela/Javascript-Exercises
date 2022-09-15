@@ -25,31 +25,7 @@ function handleClick() {
   textContainer.append(p);
 }
 
-// function handleClick() {
-//   const text = document.getElementById("text").innerText;
-//   console.log("🚀 ~ file: Question03-B.js ~ line 3 ~ handleClick ~ text", text);
-//   const userString = document.getElementById("input-hashtag").value;
-//   console.log("🚀 ~ file: Question03-B.js ~ line 3 ~ userString", userString);
-//   const newText = text.replaceAll(userString, createHashtag(userString));
-//   console.log("🚀 ~ file: Question03-B.js ~ line 7 ~ handleClick ~ newText", newText);
-//   document.getElementById("text").innerText = newText;
-// }
-
-// function createHashtag(string) {
-//   const hashtag = document.createElement("a");
-//   hashtag.text = `#${string}`;
-//   hashtag.href = `https://twitter.com/hashtag/${string}`;
-//   console.log("🚀 ~ file: Question03-B.js ~ line 15 ~ createHashtag ~ hashtag", hashtag);
-//   textContainer.appendChild(hashtag);
-// }
-
 function createHashtag(string) {
   const hashtag = `<a href=https://twitter.com/hashtag/${string}>#${string}</a>`;
-  // let newHashtag = new DOMParser().parseFromString(hashtag, "text/html");
-  //console.log("🚀 ~ file: Question03-B.js ~ line 46 ~ createHashtag ~ newHashtag", newHashtag);
   return hashtag;
 }
-
-//console.log(text.replace(userString, `#${userString}`));
-
-//https://twitter.com/hashtag/FinalFantasy

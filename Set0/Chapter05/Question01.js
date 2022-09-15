@@ -1,10 +1,10 @@
 class Client {
   constructor(name, alias, accountID, ownMoney, balance) {
-    this.name = name,
-      this.alias = alias,
-      this.accountID = accountID,
-      this.ownMoney = ownMoney,
-      this.balance = balance;
+    (this.name = name),
+      (this.alias = alias),
+      (this.accountID = accountID),
+      (this.ownMoney = ownMoney),
+      (this.balance = balance);
   }
   accountInfo(ID) {
     if (ID === this.accountID) {
@@ -14,22 +14,19 @@ class Client {
   }
   viewBalance() {
     return this.balance;
-    
   }
   depositOwn(money) {
     if (money <= this.ownMoney) {
       return (this.balance = money + this.balance);
     } else {
-      console.error("You didn't bring enough money to make that deposit");
-      return;
+      ("You didn't bring enough money to make that deposit");
     }
   }
   withdraw(money) {
     if (money <= this.balance) {
       return (this.balance = this.balance - money);
     } else {
-      console.error("Insufficient funds. Try another amount");
-      return;
+      return "Insufficient funds. Try another amount";
     }
   }
   depositAnotherfromOwnMoney(money, sender, receiver) {
@@ -41,7 +38,7 @@ class Client {
         return (receiver.balance = receiver.balance + money);
       }
     } else {
-      console.error("Insufficient funds. Try another amount");
+      return "Insufficient funds. Try another amount";
     }
   }
   depositAnotherfromBalance(money, sender, receiver) {
@@ -53,7 +50,7 @@ class Client {
         return (receiver.balance = receiver.balance + money);
       }
     } else {
-      console.error("Insufficient funds. Try another amount");
+      return "Insufficient funds. Try another amount";
     }
   }
 }
