@@ -64,10 +64,12 @@ article {
 
 .second-template-container {
   display: contents;
+  text-align: center;
 }
 
 a {
   cursor: pointer;
   text-decoration: none;
   color: black;
+  text-align: center;
 }
