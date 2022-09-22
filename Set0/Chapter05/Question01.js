@@ -1,77 +1,61 @@
 class Client {
-  constructor(name, alias, accountID, ownMoney, balance) {
-    (this.name = name),
-      (this.alias = alias),
-      (this.accountID = accountID),
-      (this.ownMoney = ownMoney),
-      (this.balance = balance);
-  }
-  accountInfo(ID) {
-    if (ID === this.accountID) {
-      const info = this;
-      return info;
-    }
-  }
-  viewBalance() {
-    return this.balance;
-  }
-  depositOwn(money) {
-    if (money <= this.ownMoney) {
-      return (this.balance = money + this.balance);
-    } else {
-      ("You didn't bring enough money to make that deposit");
-    }
-  }
-  withdraw(money) {
-    if (money <= this.balance) {
-      return (this.balance = this.balance - money);
-    } else {
-      return "Insufficient funds. Try another amount";
-    }
-  }
-  depositAnotherfromOwnMoney(money, sender, receiver) {
-    if (money <= sender.ownMoney) {
-      if (receiver.alias in bank) {
-        sender.ownMoney = sender.ownMoney - money;
-        console.log(`$${money} were transfered to ${receiver.name}`);
-        console.log(`Now you are carrying ${sender.ownMoney}`);
-        return (receiver.balance = receiver.balance + money);
-      }
-    } else {
-      return "Insufficient funds. Try another amount";
-    }
-  }
-  depositAnotherfromBalance(money, sender, receiver) {
-    if (money <= sender.balance) {
-      if (receiver.alias in bank) {
-        sender.balance = sender.balance - money;
-        console.log(`$${money} were transfered to ${receiver.name}`);
-        console.log(`Now you are carrying ${sender.balance}`);
-        return (receiver.balance = receiver.balance + money);
-      }
-    } else {
-      return "Insufficient funds. Try another amount";
-    }
+  constructor(name, accountID, firstDeposit, ownMoney) {
+    (this.name = name), (this.accountID = accountID), (this.firstDeposit = firstDeposit), (this.ownMoney = ownMoney);
   }
 }
 
-let x = 2000;
-let y = 2500;
-const client1 = new Client("James", "client1", 12345, 3000, 1800);
-const client2 = new Client("Sarah", "client2", 98765, 5000, 2500);
-const client3 = new Client("Amelia", "client3", 78563, 1000, 6500);
-console.log(client1.viewBalance());
-console.log(client1.depositOwn(x));
-console.log(client1.withdraw(y));
-console.log(client1.accountInfo(12345));
-
 const bank = {
-  client1: client1,
-  client2: client2,
-  client3: client3,
+  createClient(name, accountID, firstDeposit, ownMoney) {
+    const newClient = new Client(name, accountID, firstDeposit, ownMoney);
+    console.log(newClient);
+    bank[`${accountID}`] = { name: newClient.name, balance: newClient.firstDeposit, ownMoney: newClient.ownMoney };
+  },
+  viewBalance(accountID) {
+    if (bank[`${accountID}`]) {
+      return bank[`${accountID}`].balance;
+    }
+  },
+  withdraw(accountID, amount) {
+    if (bank[`${accountID}`]) {
+      if (bank[`${accountID}`].balance >= amount) {
+        bank[`${accountID}`].balance -= amount;
+        bank[`${accountID}`].ownMoney += amount;
+      } else return "Insufficient funds";
+    }
+    return "That's not a valid ID";
+  },
+  depositToOwnAccount(accountID, amount) {
+    if (bank[`${accountID}`].ownMoney >= amount) {
+      bank[`${accountID}`].balance += amount;
+      bank[`${accountID}`].ownMoney -= amount;
+    } else {
+      return "Insufficient funds";
+    }
+  },
+  depositToAnotherAccountFromAccount(senderID, receiverID, amount) {
+    if (bank[`${senderID}`] && bank[`${receiverID}`] && amount <= bank[`${senderID}`].balance) {
+      bank[`${receiverID}`].balance += amount;
+      bank[`${senderID}`].balance -= amount;
+    } else if (bank[`${senderID}`] && bank[`${receiverID}`] && amount >= bank[`${senderID}`].balance) {
+      return "Insufficient funds";
+    } else return "Invalid ID";
+  },
+  depositToAnotherAccountFromOwnMoney(senderID, receiverID, amount) {
+    if (bank[`${senderID}`] && bank[`${receiverID}`] && amount <= bank[`${senderID}`].ownMoney) {
+      bank[`${receiverID}`].balance += amount;
+      bank[`${senderID}`].ownMoney -= amount;
+    } else if (bank[`${senderID}`] && bank[`${receiverID}`] && amount >= bank[`${senderID}`].ownMoney) {
+      return "Insufficient funds";
+    } else return "Invalid ID";
+  },
 };
 
-console.log(bank.client3);
+bank.createClient("Sarah", "12345", 6000, 400);
+bank.createClient("James", "23456", 1200, 8000);
+bank.createClient("Erika", "34567", 3500, 1500);
+console.log(bank.depositToOwnAccount("12345", 200));
+bank.depositToAnotherAccountFromAccount("12345", "23456", 1500);
+bank.depositToAnotherAccountFromOwnMoney("23456", "12345", 1000);
+console.log(bank.viewBalance("34567"));
+bank.withdraw("34567", 2000);
 console.log(bank);
-console.log(client1.depositAnotherfromOwnMoney(850, client1, client2));
-console.log(client1.depositAnotherfromBalance(850, client1, client2));
