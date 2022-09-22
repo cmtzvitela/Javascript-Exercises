@@ -40,38 +40,32 @@ const building = [
   ],
 ];
 
-let memory = [];
-function search(searchParameter) {
-  const inMemory = memory.filter((registered) => registered.includes(searchParameter));
-  if (inMemory.length == 0) {
-    for (let floor = 0; floor < building.length; floor++) {
-      for (let office = 0; office < building[floor].length; office++) {
-        if (building[floor][office][0].name == searchParameter) {
-          memory.push(
-            `${searchParameter} was found in floor number ${[floor + 1]} in office ${floor + 1}0${office + 1}`
-          );
-        } else if (building[floor][office][1].name == searchParameter) {
-          memory.push(
-            `${searchParameter} was found in floor number ${[floor + 1]} in office ${floor + 1}0${office + 1}`
-          );
+const search = function () {
+  const memory = new Map();
+  return function (searchParameter) {
+    if (memory.has(searchParameter)) {
+      return memory.get(searchParameter);
+    } else {
+      for (let floor = 0; floor < building.length; floor++) {
+        for (let office = 0; office < building[floor].length; office++) {
+          if (building[floor][office][0].name === searchParameter) {
+            memory.set(searchParameter, `Floor ${[floor + 1]} Office ${floor + 1}0${office + 1}`);
+            return memory.get(searchParameter);
+          } else if (building[floor][office][1].name == searchParameter) {
+            memory.set(searchParameter, `Floor ${[floor + 1]} Office ${floor + 1}0${office + 1}`);
+            return memory.get(searchParameter);
+          }
         }
       }
     }
-  } else {
-    memory.forEach((element) => {
-      if (element.includes(searchParameter)) {
-        console.log(element);
-        return element;
-      }
-    });
-  }
-}
+  };
+};
 
-search("Alice");
-search("Jerry");
-search("Erika");
-console.log(memory);
-search("Erika");
-search("Sarah's Computer");
-console.log(memory);
-search("Sarah's Computer");
+const lookForPerson = search();
+const lookForObject = search();
+console.log(lookForPerson("Alice"));
+console.log(lookForPerson("Alice"));
+lookForPerson("Jerry");
+lookForPerson("Erika");
+console.log(lookForPerson("Erika"));
+console.log(lookForObject("Sarah's Computer"));
