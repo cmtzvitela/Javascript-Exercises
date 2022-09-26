@@ -1,0 +1,56 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 20px;
+  background-color: antiquewhite;
+}
+#note-space {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.note-body {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  background: aquamarine;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.note-title {
+  background: none;
+  border: none;
+}
+.note-text {
+  background: none;
+  border: none;
+  width: 180px;
+  height: 130px;
+}
+.note-delete {
+  width: 15px;
+  margin-top: 10px;
+}
+
+span {
+  color: gray;
+  font-size: 10px;
+  font-style: italic;
+  padding-top: 5px;
+}
