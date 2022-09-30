@@ -45,7 +45,7 @@ export function searchNote(searchTerm) {
   let notes = getAllNotes();
   const lowerSearch = searchTerm.toLowerCase();
   const newNotes = notes.filter((note) => {
-    return note.title.toLowerCase().includes(lowerSearch);
+    return note.title.toLowerCase().includes(lowerSearch) || note.body.toLowerCase().includes(lowerSearch);
   });
   const noteSection = document.getElementById("note-space");
   while (noteSection.firstChild) {
