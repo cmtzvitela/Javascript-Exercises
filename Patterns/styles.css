@@ -54,3 +54,7 @@ span {
   font-style: italic;
   padding-top: 5px;
 }
+
+#search-div {
+  margin-bottom: 20px;
+}
