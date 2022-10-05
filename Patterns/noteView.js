@@ -32,15 +32,16 @@ export function blurNote() {
       console.log(notes[i]);
       const editTitle = commandManager(notes[i]);
       console.log("🚀 ~ editTitle", editTitle);
-
-      const editing = editTitle.doCommand("NOTEEDIT");
-      console.log("🚀 ~ editing", editing.undo);
+      editTitle.doCommand("NOTEEDIT"); 
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
     inpBody[i].addEventListener("blur", (event) => {
       const updatedTitle = inpTitle[i].value;
       const updatedBody = inpBody[i].value;
       const noteID = event.currentTarget.parentNode.id;
+      const editBody = commandManager(notes[i]);
+      console.log("🚀 ~ editBody", editBody);
+      editBody.doCommand("NOTEEDIT"); 
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
   }

@@ -1,11 +1,14 @@
 import { editNote, getAllNotes } from "./noteFunctions.js";
+import { displayNotes } from "./noteView.js";
 
 const NOTEEDIT = "NOTEEDIT";
 
 const commandEdit = (noteToEdit) => {
   const notes = getAllNotes();
   const existing = notes.find((note) => note.id == noteToEdit.id);
+  console.log("🚀 ~ existing", existing);
   const previousTitle = existing.title;
+  console.log("🚀 ~ previousTitle", previousTitle);
   const previousBody = existing.body;
   const noteID = existing.id;
   return {
@@ -14,6 +17,12 @@ const commandEdit = (noteToEdit) => {
     },
     undo() {
       editNote({ id: noteID, title: previousTitle, body: previousBody });
+      const refreshNotes = getAllNotes();
+      const noteSection = document.getElementById("note-space");
+      while (noteSection.firstChild) {
+        noteSection.removeChild(noteSection.firstChild);
+      }
+      displayNotes(refreshNotes);
     },
   };
 };
@@ -22,16 +31,16 @@ const commands = {
   [NOTEEDIT]: commandEdit,
 };
 
+let history = [null];
+let position = 0;
 export const commandManager = (target) => {
-  let history = [null];
   console.log(history);
-  let position = 0;
 
   return {
     doCommand(commandType) {
-      if (position < history.length - 1) {
-        history = history.slice(0, position + 1);
-      }
+      // if (position < history.length - 1) {
+      //   history = history.slice(0, position + 1);
+      // }
 
       if (commands[commandType]) {
         const concreteCommand = commands[commandType](target);
@@ -46,8 +55,10 @@ export const commandManager = (target) => {
 
     undo() {
       if (position > 0) {
-        history[position].undo();
-        position -= 1;
+        const lastChange = history.pop();
+        console.log("🚀 ~ lastChange", lastChange);
+        lastChange.undo(target);
+        //position -= 1;
       }
     },
   };

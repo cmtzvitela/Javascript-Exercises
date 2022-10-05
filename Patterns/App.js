@@ -21,10 +21,11 @@ blurNote();
 dragNote();
 dropNote();
 
-const noteSection = document.getElementById("note-space")
-let sortable = new Sortable(noteSection, {})
+const noteSection = document.getElementById("note-space");
+let sortable = new Sortable(noteSection, {});
 
 const undoButton = document.getElementById("undo-button");
-undoButton.addEventListener("click", (e)=>{
-  commandManager.undo()
-})
+undoButton.addEventListener("click", (e) => {
+  const undo = commandManager();
+  undo.undo();
+});
