@@ -3,13 +3,12 @@ import { createNote, displayNotes } from "./noteView.js";
 
 const NOTEEDIT = "NOTEEDIT";
 const NOTECREATION = "NOTECREATION";
+const NOTEDELETION = "NOTEDELETION";
 
 const commandEdit = (noteToEdit) => {
   const notes = getAllNotes();
   const existing = notes.find((note) => note.id == noteToEdit.id);
-  console.log("🚀 ~ existing", existing);
   const previousTitle = existing.title;
-  console.log("🚀 ~ previousTitle", previousTitle);
   const previousBody = existing.body;
   const noteID = existing.id;
   return {
@@ -40,9 +39,31 @@ const commandCreate = () => {
   };
 };
 
+const commandDelete = (noteID) => {
+  const notes = getAllNotes();
+  const existing = notes.find((note) => note.id == noteID);
+  return {
+    execute() {
+      deleteNote(noteID);
+    },
+    undo() {
+      const notes = JSON.parse(localStorage.getItem("notes"));
+      notes.push(existing);
+      localStorage.setItem("notes", JSON.stringify(notes));
+      const refreshNotes = getAllNotes();
+      const noteSection = document.getElementById("note-space");
+      while (noteSection.firstChild) {
+        noteSection.removeChild(noteSection.firstChild);
+      }
+      displayNotes(refreshNotes);
+    },
+  };
+};
+
 const commands = {
   [NOTEEDIT]: commandEdit,
   [NOTECREATION]: commandCreate,
+  [NOTEDELETION]: commandDelete,
 };
 
 let history = [null];

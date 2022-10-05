@@ -32,7 +32,7 @@ export function blurNote() {
       console.log(notes[i]);
       const editTitle = commandManager(notes[i]);
       console.log("🚀 ~ editTitle", editTitle);
-      editTitle.doCommand("NOTEEDIT"); 
+      editTitle.doCommand("NOTEEDIT");
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
     inpBody[i].addEventListener("blur", (event) => {
@@ -41,7 +41,7 @@ export function blurNote() {
       const noteID = event.currentTarget.parentNode.id;
       const editBody = commandManager(notes[i]);
       console.log("🚀 ~ editBody", editBody);
-      editBody.doCommand("NOTEEDIT"); 
+      editBody.doCommand("NOTEEDIT");
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
   }
@@ -73,7 +73,8 @@ export function addTrash() {
 
   for (let i = 0; i < trashButton.length; i++) {
     trashButton[i].addEventListener("click", (event) => {
-      deleteNote(event.currentTarget.parentNode.id);
+      const deleteNote = commandManager(event.currentTarget.parentNode.id);
+      deleteNote.doCommand("NOTEDELETION");
     });
   }
 }
