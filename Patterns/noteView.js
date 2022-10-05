@@ -78,36 +78,36 @@ export function addTrash() {
   }
 }
 
-export function dragNote() {
-  const draggedNote = document.getElementsByClassName("note-body");
-  for (let i = 0; i < draggedNote.length; i++) {
-    draggedNote[i].addEventListener("dragstart", dragStart);
-  }
+// export function dragNote() {
+//   const draggedNote = document.getElementsByClassName("note-body");
+//   for (let i = 0; i < draggedNote.length; i++) {
+//     draggedNote[i].addEventListener("dragstart", dragStart);
+//   }
 
-  function dragStart(e) {
-    e.dataTransfer.setData("text/plain", e.target.id);
-  }
-}
+//   function dragStart(e) {
+//     e.dataTransfer.setData("text/plain", e.target.id);
+//   }
+// }
 
-export function dropNote() {
-  const noteSection = document.getElementById("note-space");
+// export function dropNote() {
+//   const noteSection = document.getElementById("note-space");
 
-  noteSection.addEventListener("dragenter", dragEnter);
-  noteSection.addEventListener("dragover", dragOver);
-  noteSection.addEventListener("drop", drop);
+//   noteSection.addEventListener("dragenter", dragEnter);
+//   noteSection.addEventListener("dragover", dragOver);
+//   noteSection.addEventListener("drop", drop);
 
-  function dragEnter(e) {
-    e.preventDefault();
-  }
+//   function dragEnter(e) {
+//     e.preventDefault();
+//   }
 
-  function dragOver(e) {
-    e.preventDefault();
-  }
+//   function dragOver(e) {
+//     e.preventDefault();
+//   }
 
-  function drop(e) {
-    const id = e.dataTransfer.getData("text/plain");
-    const draggable = document.getElementById(id);
+//   function drop(e) {
+//     const id = e.dataTransfer.getData("text/plain");
+//     const draggable = document.getElementById(id);
 
-    e.target.appendChild(draggable);
-  }
-}
+//     e.target.appendChild(draggable);
+//   }
+// }

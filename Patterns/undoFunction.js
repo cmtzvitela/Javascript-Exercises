@@ -1,7 +1,8 @@
-import { editNote, getAllNotes } from "./noteFunctions.js";
-import { displayNotes } from "./noteView.js";
+import { deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
+import { createNote, displayNotes } from "./noteView.js";
 
 const NOTEEDIT = "NOTEEDIT";
+const NOTECREATION = "NOTECREATION";
 
 const commandEdit = (noteToEdit) => {
   const notes = getAllNotes();
@@ -27,8 +28,21 @@ const commandEdit = (noteToEdit) => {
   };
 };
 
+const commandCreate = () => {
+  return {
+    execute() {
+      createNote();
+    },
+    undo() {
+      const notes = getAllNotes();
+      deleteNote(notes[notes.length - 1].id);
+    },
+  };
+};
+
 const commands = {
   [NOTEEDIT]: commandEdit,
+  [NOTECREATION]: commandCreate,
 };
 
 let history = [null];

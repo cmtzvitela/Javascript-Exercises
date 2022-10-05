@@ -1,12 +1,14 @@
 import { getAllNotes, searchNote } from "./noteFunctions.js";
-import { displayNotes, blurNote, createNote, addTrash, dragNote, dropNote } from "./noteView.js";
+import { displayNotes, blurNote, createNote, addTrash } from "./noteView.js";
 import { commandManager } from "./undoFunction.js";
 
 const initialNotes = getAllNotes();
 displayNotes(initialNotes);
 const createNoteButton = document.getElementById("create-note-button");
 createNoteButton.addEventListener("click", () => {
-  createNote();
+  const createNewNote = commandManager();
+  createNewNote.doCommand("NOTECREATION");
+  //createNote();
 });
 
 const searchInput = document.getElementById("search");
@@ -18,8 +20,8 @@ searchInput.addEventListener("input", (e) => {
 
 addTrash();
 blurNote();
-dragNote();
-dropNote();
+// dragNote();
+// dropNote();
 
 const noteSection = document.getElementById("note-space");
 let sortable = new Sortable(noteSection, {});
