@@ -1,5 +1,6 @@
 import { getAllNotes, searchNote } from "./noteFunctions.js";
 import { displayNotes, blurNote, createNote, addTrash, dragNote, dropNote } from "./noteView.js";
+import { commandManager } from "./undoFunction.js";
 
 const initialNotes = getAllNotes();
 displayNotes(initialNotes);
@@ -21,6 +22,9 @@ dragNote();
 dropNote();
 
 const noteSection = document.getElementById("note-space")
-let sortable = new Sortable(noteSection, {
-  
+let sortable = new Sortable(noteSection, {})
+
+const undoButton = document.getElementById("undo-button");
+undoButton.addEventListener("click", (e)=>{
+  commandManager.undo()
 })

@@ -1,4 +1,5 @@
-import { deleteNote, editNote } from "./noteFunctions.js";
+import { deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
+import { commandManager } from "./undoFunction.js";
 
 export function displayNotes(noteArray = []) {
   noteArray.forEach((note) => {
@@ -20,6 +21,7 @@ export function displayNotes(noteArray = []) {
 }
 
 export function blurNote() {
+  const notes = getAllNotes();
   const inpTitle = document.getElementsByClassName("note-title");
   const inpBody = document.getElementsByClassName("note-text");
   for (let i = 0; i < inpTitle.length; i++) {
@@ -27,6 +29,12 @@ export function blurNote() {
       const updatedTitle = inpTitle[i].value;
       const updatedBody = inpBody[i].value;
       const noteID = event.currentTarget.parentNode.id;
+      console.log(notes[i]);
+      const editTitle = commandManager(notes[i]);
+      console.log("🚀 ~ editTitle", editTitle);
+
+      const editing = editTitle.doCommand("NOTEEDIT");
+      console.log("🚀 ~ editing", editing.undo);
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
     inpBody[i].addEventListener("blur", (event) => {
