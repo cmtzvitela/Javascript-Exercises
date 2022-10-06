@@ -79,16 +79,16 @@ export function addTrash() {
   }
 }
 
-// export function dragNote() {
-//   const draggedNote = document.getElementsByClassName("note-body");
-//   for (let i = 0; i < draggedNote.length; i++) {
-//     draggedNote[i].addEventListener("dragstart", dragStart);
-//   }
-
-//   function dragStart(e) {
-//     e.dataTransfer.setData("text/plain", e.target.id);
-//   }
-// }
+export function dragNote() {
+  const draggedNote = document.getElementsByClassName("note-body");
+  const notes = getAllNotes();
+  for (let i = 0; i < draggedNote.length; i++) {
+    draggedNote[i].addEventListener("dragstart", (e) => {
+      const dragNote = commandManager(notes);
+      dragNote.doCommand("NOTEDRAG");
+    });
+  }
+}
 
 // export function dropNote() {
 //   const noteSection = document.getElementById("note-space");

@@ -1,5 +1,5 @@
 import { getAllNotes, searchNote } from "./noteFunctions.js";
-import { displayNotes, blurNote, createNote, addTrash } from "./noteView.js";
+import { displayNotes, blurNote, dragNote, addTrash } from "./noteView.js";
 import { commandManager } from "./undoFunction.js";
 
 const initialNotes = getAllNotes();
@@ -20,7 +20,7 @@ searchInput.addEventListener("input", (e) => {
 
 addTrash();
 blurNote();
-// dragNote();
+dragNote();
 // dropNote();
 
 const noteSection = document.getElementById("note-space");

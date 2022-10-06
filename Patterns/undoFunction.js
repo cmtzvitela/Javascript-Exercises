@@ -4,6 +4,7 @@ import { createNote, displayNotes } from "./noteView.js";
 const NOTEEDIT = "NOTEEDIT";
 const NOTECREATION = "NOTECREATION";
 const NOTEDELETION = "NOTEDELETION";
+const NOTEDRAG = "NOTEDRAG";
 
 const commandEdit = (noteToEdit) => {
   const notes = getAllNotes();
@@ -60,10 +61,26 @@ const commandDelete = (noteID) => {
   };
 };
 
+const commandDrag = (dragArray) => {
+  return {
+    execute() {
+      return;
+    },
+    undo() {
+      const noteSection = document.getElementById("note-space");
+      while (noteSection.firstChild) {
+        noteSection.removeChild(noteSection.firstChild);
+      }
+      displayNotes(dragArray);
+    },
+  };
+};
+
 const commands = {
   [NOTEEDIT]: commandEdit,
   [NOTECREATION]: commandCreate,
   [NOTEDELETION]: commandDelete,
+  [NOTEDRAG]: commandDrag,
 };
 
 let history = [null];
