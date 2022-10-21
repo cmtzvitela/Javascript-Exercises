@@ -1,5 +1,5 @@
 import { deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
-import { createNote, displayNotes } from "./noteView.js";
+import { createNote, displayNotes, blurNote, dragNote, addTrash } from "./noteView.js";
 
 const NOTEEDIT = "NOTEEDIT";
 const NOTECREATION = "NOTECREATION";
@@ -24,6 +24,9 @@ const commandEdit = (noteToEdit) => {
         noteSection.removeChild(noteSection.firstChild);
       }
       displayNotes(refreshNotes);
+      addTrash();
+      blurNote();
+      dragNote();
     },
   };
 };
@@ -57,6 +60,9 @@ const commandDelete = (noteID) => {
         noteSection.removeChild(noteSection.firstChild);
       }
       displayNotes(refreshNotes);
+      addTrash();
+      blurNote();
+      dragNote();
     },
   };
 };
@@ -72,6 +78,9 @@ const commandDrag = (dragArray) => {
         noteSection.removeChild(noteSection.firstChild);
       }
       displayNotes(dragArray);
+      addTrash();
+      blurNote();
+      dragNote();
     },
   };
 };
@@ -87,12 +96,14 @@ let history = [null];
 let position = 0;
 export const commandManager = (target) => {
   console.log(history);
-
+  if (history.length === 0) {
+    return;
+  }
   return {
     doCommand(commandType) {
-      // if (position < history.length - 1) {
-      //   history = history.slice(0, position + 1);
-      // }
+      if (position < history.length - 1) {
+        history = history.slice(0, position + 1);
+      }
 
       if (commands[commandType]) {
         const concreteCommand = commands[commandType](target);

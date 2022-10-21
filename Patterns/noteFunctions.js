@@ -1,4 +1,4 @@
-import { displayNotes, addTrash } from "./noteView.js";
+import { displayNotes, addTrash, blurNote, dragNote } from "./noteView.js";
 
 export function getAllNotes() {
   const notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -19,6 +19,8 @@ export function deleteNote(noteID) {
   }
   displayNotes(newNotes);
   addTrash();
+  blurNote();
+  dragNote();
 }
 
 export function updatedDate(existingNote) {
