@@ -2,7 +2,7 @@ function addRec(arr) {
   if (arr.length === 1) {
     return arr[0];
   } else {
-    return arr[arr.length - 1] + addRec(arr.slice(0, arr.length - 1));
+    return arr[arr.length - 1] + addRec(arr.splice(0, arr.length - 1));
   }
 }
 
