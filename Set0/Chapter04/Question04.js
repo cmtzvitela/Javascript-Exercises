@@ -2,9 +2,6 @@ function dataType(...arguments) {
   let resultString = "";
   arguments.forEach((element) => {
     switch (typeof element) {
-      case "string":
-        resultString = resultString + "string, ";
-        break;
       case "number":
         if (Number.isInteger(element)) {
           resultString = resultString + "integer, ";
@@ -13,9 +10,6 @@ function dataType(...arguments) {
           resultString = resultString + "float, ";
           break;
         }
-      case "function":
-        resultString = resultString + "function, ";
-        break;
       case "object":
         if (element.length) {
           resultString = resultString + "array, ";
@@ -25,6 +19,7 @@ function dataType(...arguments) {
           break;
         }
       default:
+        resultString = resultString + `${typeof element}, `;
         break;
     }
   });
