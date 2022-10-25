@@ -5,7 +5,7 @@ function distance(...coordinates) {
     case 6:
       return distance3Points();
     default:
-      return "Invalid number of arguments, submit four or six arguments";
+      throw new Error("Invalid number of arguments, submit four or six arguments");
   }
 }
 
@@ -17,11 +17,11 @@ const x1 = 1,
 const x2 = 2,
   y2 = 2,
   z2 = 4;
-const delta1 = distance(x1, y1, x2, y2); // delta = 1
+const delta1 = distance(1, 2, 2, 2); // delta = 1
 console.log("The distance between those points is ", delta1);
-const delta2 = distance(x1, y1, z1, x2, y2, z2); // delta = 3.1622…
+const delta2 = distance(1, 2, 1, 2, 2, 4); // delta = 3.1622…
 console.log("The distance between those points is ", delta2);
-const delta3 = distance(x1, y1, x2, y2, z1);
+const delta3 = distance(1, 2, 2, 2, 1);
 console.log(delta3);
 
 function distance2Points() {
