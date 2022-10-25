@@ -38,6 +38,20 @@ const building = [
       { type: "equipment", name: "Erika's Computer", belongsTo: "Erika" },
     ],
   ],
+  [
+    //Fourth floor
+    [
+      //Office 401
+      { type: "equipment", name: "Copy Machine", belongsTo: "Everyone" },
+    ],
+    [
+      //Office 402
+      { type: "person", name: "Taylor" },
+      { type: "person", name: "Gaga" },
+      { type: "person", name: "Lana" },
+      { type: "person", name: "Adele" },
+    ],
+  ],
 ];
 
 const search = function () {
@@ -48,12 +62,11 @@ const search = function () {
     } else {
       for (let floor = 0; floor < building.length; floor++) {
         for (let office = 0; office < building[floor].length; office++) {
-          if (building[floor][office][0].name === searchParameter) {
-            memory.set(searchParameter, `Floor ${[floor + 1]} Office ${floor + 1}0${office + 1}`);
-            return memory.get(searchParameter);
-          } else if (building[floor][office][1].name == searchParameter) {
-            memory.set(searchParameter, `Floor ${[floor + 1]} Office ${floor + 1}0${office + 1}`);
-            return memory.get(searchParameter);
+          for (let subject = 0; subject < building[floor][office].length; subject++) {
+            if (building[floor][office][subject].name === searchParameter) {
+              memory.set(searchParameter, `Floor ${[floor + 1]} Office ${floor + 1}0${office + 1}`);
+              return memory.get(searchParameter);
+            }
           }
         }
       }
@@ -61,11 +74,13 @@ const search = function () {
   };
 };
 
-const lookForPerson = search();
-const lookForObject = search();
-console.log(lookForPerson("Alice"));
-console.log(lookForPerson("Alice"));
-lookForPerson("Jerry");
-lookForPerson("Erika");
-console.log(lookForPerson("Erika"));
-console.log(lookForObject("Sarah's Computer"));
+const lookingFor = search();
+console.log(lookingFor("Alice"));
+console.log(lookingFor("Alice"));
+lookingFor("Jerry");
+lookingFor("Erika");
+console.log(lookingFor("Erika"));
+console.log(lookingFor("Sarah's Computer"));
+console.log(lookingFor("Copy Machine"));
+console.log(lookingFor("Lana"));
+console.log(lookingFor("Adele"));
