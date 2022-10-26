@@ -72,18 +72,9 @@ defaultFragment.appendChild(text);
 const textSpace = document.getElementById("text-columns");
 textSpace.appendChild(defaultFragment);
 
-const twoColumns = document.getElementById("two");
-twoColumns.addEventListener("click", () => {
-  appendFragment(twoColumns);
-});
-const threeColumns = document.getElementById("three");
-threeColumns.addEventListener("click", () => {
-  appendFragment(threeColumns);
-});
-
-const fourColumns = document.getElementById("four");
-fourColumns.addEventListener("click", () => {
-  appendFragment(fourColumns);
+const columnSelector = document.getElementById("column-selector");
+columnSelector.addEventListener("click", (e) => {
+  appendFragment(e.target);
 });
 
 function appendFragment(el) {
