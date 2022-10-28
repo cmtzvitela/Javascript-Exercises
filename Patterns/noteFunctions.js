@@ -25,9 +25,10 @@ export function deleteNote(noteID) {
 
 export function updatedDate(existingNote) {
   const noteToUpdate = document.getElementById(existingNote.id);
+  console.log("🚀 ~ noteToUpdate", noteToUpdate);
   const span = noteToUpdate.getElementsByTagName("span");
   const date = existingNote.updated;
-  span[0].textContent = `Last updated ${date.toLocaleString()}`;
+  span.textContent = `Last updated ${date.toLocaleString()}`;
 }
 
 export function editNote(noteToEdit) {

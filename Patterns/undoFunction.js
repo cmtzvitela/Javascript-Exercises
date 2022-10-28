@@ -108,10 +108,7 @@ export const commandManager = (target) => {
       if (commands[commandType]) {
         const concreteCommand = commands[commandType](target);
         history.push(concreteCommand);
-        console.log("🚀 ~ history", history);
         position += 1;
-        console.log("🚀 ~ position", position);
-
         concreteCommand.execute();
       }
     },
@@ -121,7 +118,6 @@ export const commandManager = (target) => {
         const lastChange = history.pop();
         console.log("🚀 ~ lastChange", lastChange);
         lastChange.undo(target);
-        //position -= 1;
       }
     },
   };

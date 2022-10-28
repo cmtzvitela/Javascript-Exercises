@@ -1,4 +1,4 @@
-import { deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
+import { deleteNote, editNote, getAllNotes, updatedDate } from "./noteFunctions.js";
 import { commandManager } from "./undoFunction.js";
 
 export function displayNotes(noteArray = []) {
@@ -11,6 +11,12 @@ export function displayNotes(noteArray = []) {
     const noteTitle = clonedTemplate.getElementById("note-title");
     noteTitle.value = `${note.title}`;
     const noteText = clonedTemplate.getElementById("note-text");
+    noteText.addEventListener("keydown", (e) => {
+      if (e.keyCode === 9) {
+        e.preventDefault();
+        noteText.setRangeText("\t ", noteText.selectionStart, noteText.selectionEnd);
+      }
+    });
     noteText.value = `${note.body}`;
     const noteToUpdate = clonedTemplate.getElementById(`${note.id}`);
     const span = noteToUpdate.getElementsByTagName("span");
@@ -29,9 +35,7 @@ export function blurNote() {
       const updatedTitle = inpTitle[i].value;
       const updatedBody = inpBody[i].value;
       const noteID = event.currentTarget.parentNode.id;
-      console.log(notes[i]);
       const editTitle = commandManager(notes[i]);
-      console.log("🚀 ~ editTitle", editTitle);
       editTitle.doCommand("NOTEEDIT");
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
@@ -64,6 +68,10 @@ export function createNote() {
   const clonedTemplate = noteTemplate.content.cloneNode(true);
   const noteSection = document.getElementById("note-space");
   noteSection.appendChild(clonedTemplate);
+  while (noteSection.firstChild) {
+    noteSection.removeChild(noteSection.firstChild);
+  }
+  displayNotes(getAllNotes());
   addTrash();
   blurNote();
 }
@@ -73,8 +81,11 @@ export function addTrash() {
 
   for (let i = 0; i < trashButton.length; i++) {
     trashButton[i].addEventListener("click", (event) => {
-      const deleteNote = commandManager(event.currentTarget.parentNode.id);
-      deleteNote.doCommand("NOTEDELETION");
+      const confirmation = confirm("The note will be deleted");
+      if (confirmation) {
+        const deleteNote = commandManager(event.currentTarget.parentNode.id);
+        deleteNote.doCommand("NOTEDELETION");
+      }
     });
   }
 }
@@ -89,26 +100,3 @@ export function dragNote() {
     });
   }
 }
-
-// export function dropNote() {
-//   const noteSection = document.getElementById("note-space");
-
-//   noteSection.addEventListener("dragenter", dragEnter);
-//   noteSection.addEventListener("dragover", dragOver);
-//   noteSection.addEventListener("drop", drop);
-
-//   function dragEnter(e) {
-//     e.preventDefault();
-//   }
-
-//   function dragOver(e) {
-//     e.preventDefault();
-//   }
-
-//   function drop(e) {
-//     const id = e.dataTransfer.getData("text/plain");
-//     const draggable = document.getElementById(id);
-
-//     e.target.appendChild(draggable);
-//   }
-// }
