@@ -5,6 +5,7 @@ fetch("./info.json")
   .then((info) => {
     console.log(location);
     const template1 = document.getElementById("template-1");
+    const template2 = document.getElementById("template-2");
     const homeAnchor = document.createElement("a");
     homeAnchor.id = "home";
     const container = document.createElement("section");
@@ -29,25 +30,26 @@ fetch("./info.json")
     }
     function createArticles() {
       for (let i = 0; i < info.length; i++) {
-        const anchor = document.createElement("a");
+        const clonedTemplate = template1.content.cloneNode(true);
+        const anchor = clonedTemplate.getElementById("anchor");
         anchor.href = `#article${info[i].id}`;
-        const content = document.createElement("div");
+        const content = clonedTemplate.getElementById("content");
         anchor.appendChild(content);
         content.className = "content";
         content.id = `article ${info[i].id}`;
-        const image = document.createElement("div");
+        const image = clonedTemplate.getElementById("image");
         image.className = "image";
         const numberImage = document.createElement("h3");
         image.appendChild(numberImage);
         content.appendChild(image);
         image.style.backgroundImage = "url(" + info[i].img + ")";
-        const article = document.createElement("article");
+        const article = clonedTemplate.getElementById("article");
         content.appendChild(article);
-        const title = document.createElement("h2");
-        title.id = "title";
+        const title = clonedTemplate.getElementById("title");
+        title.id = "text";
         title.textContent = info[i].title;
         article.appendChild(title);
-        const text = document.createElement("p");
+        const text = clonedTemplate.getElementById("text");
         text.id = "text";
         text.textContent = info[i].text;
         article.appendChild(text);
@@ -59,33 +61,26 @@ fetch("./info.json")
     }
 
     function otherTemplate(obj) {
-      const template2 = document.getElementById("template-2");
-      const divContainer = document.createElement("div");
+      const clonedTemplate = template2.content.cloneNode(true);
+      const divContainer = clonedTemplate.getElementById("second-container");
       divContainer.id = `article${obj.id}`;
-      divContainer.classList = "second-template-container";
-      template2.appendChild(divContainer);
-      const title = document.createElement("h2");
-      divContainer.appendChild(title);
-      title.textContent = obj.title;
-      const imageDiv = document.createElement("div");
-      divContainer.appendChild(imageDiv);
-      const image = document.createElement("img");
+      const title2 = clonedTemplate.getElementById("title-2");
+      title2.textContent = obj.title;
+      const imageDiv = clonedTemplate.getElementById("image-div");
+      const image = clonedTemplate.getElementById("image2");
       image.src = obj.img;
       image.classList = "article-image";
-      imageDiv.appendChild(image);
-      const text = document.createElement("p");
+      const text = clonedTemplate.getElementById("text2");
       text.textContent = obj.text;
-      divContainer.appendChild(text);
-      const goBack = document.createElement("a");
+      const goBack = clonedTemplate.getElementById("go-back");
       goBack.textContent = "Go back!";
       goBack.href = "#home";
-      divContainer.appendChild(goBack);
-      document.body.appendChild(template2);
+      document.body.appendChild(clonedTemplate);
       template1.style.display = "none";
       template2.style.display = "block";
       goBack.addEventListener("click", () => {
         const removeDiv = document.getElementById(`article${obj.id}`);
-        template2.removeChild(removeDiv);
+        document.body.removeChild(removeDiv);
         template1.style.display = "block";
         firstTemplate();
       });
