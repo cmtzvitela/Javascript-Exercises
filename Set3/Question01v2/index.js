@@ -9,15 +9,21 @@ const noteFunctions = {
 
   displayNotes() {
     const notes = this.getAllNotes();
+    const noteTemplate = document.getElementById("new-note");
+    const noteSection = document.getElementById("note-space");
     notes.forEach((note) => {
-      const noteTemplate = document.getElementById("new-note");
       const clonedTemplate = noteTemplate.content.cloneNode(true);
       const noteDiv = clonedTemplate.getElementById("note-body");
       noteDiv.id = `${note.id}`;
-      const noteSection = document.getElementById("note-space");
       const noteTitle = clonedTemplate.getElementById("note-title");
       noteTitle.value = `${note.title}`;
       const noteText = clonedTemplate.getElementById("note-text");
+      noteText.addEventListener("keydown", (e) => {
+        if (e.keyCode === 9) {
+          e.preventDefault();
+          noteText.setRangeText("\t ", noteText.selectionStart, noteText.selectionEnd);
+        }
+      });
       noteText.value = `${note.body}`;
       const noteToUpdate = clonedTemplate.getElementById(`${note.id}`);
       const span = noteToUpdate.getElementsByTagName("span");
@@ -104,7 +110,10 @@ const noteFunctions = {
 
     for (let i = 0; i < trashButton.length; i++) {
       trashButton[i].addEventListener("click", (event) => {
-        noteFunctions.deleteNote(event.currentTarget.parentNode.id);
+        const confirmation = confirm("The note will be deleted");
+        if (confirmation) {
+          noteFunctions.deleteNote(event.currentTarget.parentNode.id);
+        }
       });
     }
   },
