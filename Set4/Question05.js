@@ -1,3 +1,5 @@
+//Function to duplicate the values of an array and add them to it
+
 Array.prototype.duplicate = function () {
   let doubledArray = this;
   this.forEach((e) => {
