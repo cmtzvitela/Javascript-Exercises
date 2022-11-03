@@ -1,0 +1,27 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 20px;
+  background-color: antiquewhite;
+}
+
+#square {
+  background-color: aquamarine;
+  border: 2px black solid;
+  height: 80px;
+  width: 80px;
+  cursor: pointer;
+  position: relative;
+}
+section {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
