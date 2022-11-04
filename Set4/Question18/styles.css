@@ -1,0 +1,29 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 20px;
+  background-color: antiquewhite;
+}
+
+table {
+  text-align: center;
+  border: solid black 2px;
+}
+th {
+  width: 100px;
+  padding: 5px;
+}
+td {
+  width: fit-content;
+}
+#add-button {
+  cursor: pointer;
+  color: blue;
+}

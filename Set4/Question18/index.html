@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./Question18.js" defer></script>
+  </head>
+  <body>
+    <table id="table-content">
+      <caption>
+        Candidate List
+      </caption>
+      <tr id="headers">
+        <th id="name-header">Name</th>
+        <th id="last-name-header">Last Name</th>
+        <th id="phone-header">Phone</th>
+        <th id="add-header"><a id="add-button">#Add Candidate</a></th>
+      </tr>
+    </table>
+    <template id="candidates">
+      <tr id="table-row">
+        <td id="name"></td>
+        <td id="last-name"></td>
+        <td id="phone"></td>
+        <td id="edit-delete"><a id="edit" class="edit">Edit</a>/<a id="delete" class="delete">Delete</a></td>
+      </tr>
+    </template>
+  </body>
+</html>
