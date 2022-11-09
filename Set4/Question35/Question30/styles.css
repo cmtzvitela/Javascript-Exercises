@@ -1,0 +1,27 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 50px;
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  font-size: x-large;
+}
+
+table {
+  width: 500px;
+  border: 5px solid black;
+}
+
+button {
+  width: 100px;
+  margin: 30px;
+}
