@@ -43,6 +43,7 @@ h3 {
   height: 50px;
   text-decoration: underline;
   margin-left: 10px;
+  position: absolute;
   counter-increment: css-counter 1;
 }
 h3::before {
