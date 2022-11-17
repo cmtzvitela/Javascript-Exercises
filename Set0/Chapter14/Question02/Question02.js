@@ -62,30 +62,38 @@ nostrum esse cumque impedit pariatur repudiandae voluptatem iste harum temporibu
 aspernatur illo. Rerum.`;
 const titleText = `Lorem ipsum, dolor sit amet consectetur adipisicing elit.`;
 
-const defaultFragment = document.createDocumentFragment();
-const title = document.createElement("h2");
-title.textContent = titleText;
-defaultFragment.appendChild(title);
-const text = document.createTextNode(columnsText);
-defaultFragment.appendChild(text);
-
+const template = document.getElementById("template");
 const textSpace = document.getElementById("text-columns");
-textSpace.appendChild(defaultFragment);
+
+defaultView();
 
 const columnSelector = document.getElementById("column-selector");
 columnSelector.addEventListener("click", (e) => {
-  appendFragment(e.target);
+  appendTemplate(e.target);
 });
 
-function appendFragment(el) {
-  const fragment = document.createDocumentFragment();
-  const title = document.createElement("h2");
+function defaultView() {
+  const clonedTemplate = template.content.cloneNode(true);
+  const title = clonedTemplate.getElementById("title");
   title.textContent = titleText;
-  fragment.appendChild(title);
-  const text = document.createTextNode(columnsText);
-  fragment.appendChild(text);
+  const text = clonedTemplate.getElementById("text");
+  text.textContent = columnsText;
+  textSpace.appendChild(clonedTemplate);
+}
+function appendTemplate(el) {
+  removeTemplate();
+  const newTemplate = template.content.cloneNode(true);
+  const title = newTemplate.getElementById("title");
+  title.textContent = titleText;
+  const text = newTemplate.getElementById("text");
+  text.textContent = columnsText;
   const element = document.getElementById("text-columns");
   element.style.columnCount = el.value;
-  element.removeChild(textSpace);
-  element.appendChild(fragment);
+  textSpace.appendChild(newTemplate);
+}
+
+function removeTemplate() {
+  while (textSpace.lastElementChild) {
+    textSpace.removeChild(textSpace.lastElementChild);
+  }
 }
