@@ -1,16 +1,12 @@
 class Client {
   constructor(name, accountID, firstDeposit, ownMoney) {
-    this.name = name, 
-    this.accountID = accountID, 
-    this.firstDeposit = firstDeposit, 
-    this.ownMoney = ownMoney;
+    (this.name = name), (this.accountID = accountID), (this.firstDeposit = firstDeposit), (this.ownMoney = ownMoney);
   }
 }
 
 const bank = {
   createClient(name, accountID, firstDeposit, ownMoney) {
     const newClient = new Client(name, accountID, firstDeposit, ownMoney);
-    console.log(newClient);
     bank[`${accountID}`] = { name: newClient.name, balance: newClient.firstDeposit, ownMoney: newClient.ownMoney };
   },
   viewBalance(accountID) {
@@ -42,7 +38,7 @@ const bank = {
       bank[`${receiverID}`].balance += amount;
       bank[`${senderID}`].balance -= amount;
     } else if (bank[`${senderID}`] && bank[`${receiverID}`] && amount >= bank[`${senderID}`].balance) {
-      throw new Error ("Insufficient funds");
+      throw new Error("Insufficient funds");
     } else throw new Error("That's not a valid ID");
   },
   depositToAnotherAccountFromOwnMoney(senderID, receiverID, amount) {

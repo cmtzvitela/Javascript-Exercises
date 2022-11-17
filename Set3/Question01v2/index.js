@@ -21,7 +21,7 @@ const noteFunctions = {
       noteText.addEventListener("keydown", (e) => {
         if (e.keyCode === 9) {
           e.preventDefault();
-          noteText.setRangeText("\t ", noteText.selectionStart, noteText.selectionEnd);
+          noteText.setRangeText("\t ", noteText.selectionStart, noteText.selectionEnd, "end");
         }
       });
       noteText.value = `${note.body}`;
@@ -69,13 +69,13 @@ const noteFunctions = {
     const inpTitle = document.getElementsByClassName("note-title");
     const inpBody = document.getElementsByClassName("note-text");
     for (let i = 0; i < inpTitle.length; i++) {
-      inpTitle[i].addEventListener("blur", (event) => {
+      inpTitle[i].addEventListener("input", (event) => {
         const updatedTitle = inpTitle[i].value;
         const updatedBody = inpBody[i].value;
         const noteID = event.currentTarget.parentNode.id;
         this.editNote({ id: noteID, title: updatedTitle, body: updatedBody });
       });
-      inpBody[i].addEventListener("blur", (event) => {
+      inpBody[i].addEventListener("input", (event) => {
         const updatedTitle = inpTitle[i].value;
         const updatedBody = inpBody[i].value;
         const noteID = event.currentTarget.parentNode.id;
