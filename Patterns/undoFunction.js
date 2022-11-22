@@ -1,5 +1,5 @@
-import { deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
-import { createNote, displayNotes, blurNote, dragNote, addTrash } from "./noteView.js";
+import { createNote, deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
+import { displayNotes, blurNote, dragNote, addTrash } from "./noteView.js";
 
 const NOTEEDIT = "NOTEEDIT";
 const NOTECREATION = "NOTECREATION";
@@ -116,7 +116,6 @@ export const commandManager = (target) => {
     undo() {
       if (position > 0) {
         const lastChange = history.pop();
-        console.log("🚀 ~ lastChange", lastChange);
         lastChange.undo(target);
       }
     },

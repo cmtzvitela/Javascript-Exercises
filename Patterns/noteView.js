@@ -14,7 +14,7 @@ export function displayNotes(noteArray = []) {
     noteText.addEventListener("keydown", (e) => {
       if (e.keyCode === 9) {
         e.preventDefault();
-        noteText.setRangeText("\t ", noteText.selectionStart, noteText.selectionEnd);
+        noteText.setRangeText("\t ", noteText.selectionStart, noteText.selectionEnd, "end");
       }
     });
     noteText.value = `${note.body}`;
@@ -31,7 +31,7 @@ export function blurNote() {
   const inpTitle = document.getElementsByClassName("note-title");
   const inpBody = document.getElementsByClassName("note-text");
   for (let i = 0; i < inpTitle.length; i++) {
-    inpTitle[i].addEventListener("blur", (event) => {
+    inpTitle[i].addEventListener("input", (event) => {
       const updatedTitle = inpTitle[i].value;
       const updatedBody = inpBody[i].value;
       const noteID = event.currentTarget.parentNode.id;
@@ -39,7 +39,7 @@ export function blurNote() {
       editTitle.doCommand("NOTEEDIT");
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
-    inpBody[i].addEventListener("blur", (event) => {
+    inpBody[i].addEventListener("input", (event) => {
       const updatedTitle = inpTitle[i].value;
       const updatedBody = inpBody[i].value;
       const noteID = event.currentTarget.parentNode.id;
@@ -49,31 +49,6 @@ export function blurNote() {
       editNote({ id: noteID, title: updatedTitle, body: updatedBody });
     });
   }
-}
-
-export function createNote() {
-  const newNote = {
-    id: Math.floor(Math.random() * 1000000),
-    title: "New Note",
-    body: "Take note...",
-    creationDate: new Date(),
-  };
-  if (!localStorage.getItem("notes")) {
-    localStorage.setItem("notes", JSON.stringify([]));
-  }
-  const notes = JSON.parse(localStorage.getItem("notes"));
-  notes.push(newNote);
-  localStorage.setItem("notes", JSON.stringify(notes));
-  const noteTemplate = document.getElementById("new-note");
-  const clonedTemplate = noteTemplate.content.cloneNode(true);
-  const noteSection = document.getElementById("note-space");
-  noteSection.appendChild(clonedTemplate);
-  while (noteSection.firstChild) {
-    noteSection.removeChild(noteSection.firstChild);
-  }
-  displayNotes(getAllNotes());
-  addTrash();
-  blurNote();
 }
 
 export function addTrash() {

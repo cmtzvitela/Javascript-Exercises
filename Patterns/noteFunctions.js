@@ -2,10 +2,35 @@ import { displayNotes, addTrash, blurNote, dragNote } from "./noteView.js";
 
 export function getAllNotes() {
   const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  return notes;
+  // return notes.sort((a, b) => {
+  //   return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
+  // });
+}
 
-  return notes.sort((a, b) => {
-    return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
-  });
+export function createNote() {
+  const newNote = {
+    id: Math.floor(Math.random() * 1000000),
+    title: "New Note",
+    body: "Take note...",
+    creationDate: new Date(),
+  };
+  if (!localStorage.getItem("notes")) {
+    localStorage.setItem("notes", JSON.stringify([]));
+  }
+  const notes = JSON.parse(localStorage.getItem("notes"));
+  notes.push(newNote);
+  localStorage.setItem("notes", JSON.stringify(notes));
+  const noteTemplate = document.getElementById("new-note");
+  const clonedTemplate = noteTemplate.content.cloneNode(true);
+  const noteSection = document.getElementById("note-space");
+  noteSection.appendChild(clonedTemplate);
+  while (noteSection.firstChild) {
+    noteSection.removeChild(noteSection.firstChild);
+  }
+  displayNotes(getAllNotes());
+  addTrash();
+  blurNote();
 }
 
 export function deleteNote(noteID) {

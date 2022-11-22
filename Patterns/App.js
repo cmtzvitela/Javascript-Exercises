@@ -13,7 +13,7 @@ createNoteButton.addEventListener("click", () => {
 
 const searchInput = document.getElementById("search");
 let searchTerm = "";
-searchInput.addEventListener("input", (e) => {
+searchInput.addEventListener("change", (e) => {
   searchTerm = e.target.value;
   searchNote(searchTerm);
 });
@@ -24,7 +24,19 @@ dragNote();
 // dropNote();
 
 const noteSection = document.getElementById("note-space");
-let sortable = new Sortable(noteSection, {});
+let sort = new Sortable(noteSection, {
+  group: "noteOrder",
+  store: {
+    get: function (sortable) {
+      var order = localStorage.getItem(sortable.options.group.name);
+      return order ? order.split("|") : [];
+    },
+    set: function (sortable) {
+      var order = sortable.toArray();
+      localStorage.setItem(sortable.options.group.name, order.join("|"));
+    },
+  },
+});
 
 const undoButton = document.getElementById("undo-button");
 undoButton.addEventListener("click", (e) => {
