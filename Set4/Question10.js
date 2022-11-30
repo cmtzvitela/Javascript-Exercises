@@ -24,13 +24,14 @@ const doc1 = new Medic("Sarah Jessica", "Parker", "Cardiology");
 console.log(doc1.fullName());
 console.log(doc1.doctorInfo());
 
-const http = new XMLHttpRequest();
-const url = "http://www.someurl.com";
-http.open("GET", url);
-http.send();
+function getPerson() {
+  fetch("http://www.getperson.com/doc1")
+    .then((response) => {
+      response.json();
+    })
+    .then((data) => {
+      return data;
+    });
+}
 
-http.onreadystatechange = function () {
-  if (this.readyState === 4 && this.status == 200) {
-    console.log(http.responseText);
-  }
-};
+console.log(getPerson());
