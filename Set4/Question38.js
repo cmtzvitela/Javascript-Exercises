@@ -1,3 +1,10 @@
+//I made a dummy of an RPG, I created a base Character class that has the name and initial level of the character and to its prototype.
+//I added methods for greeting, basic attack, drinking potions and leveling up depending on the growth values of each job.
+//I added this things to the prototype so that every time a character is created, it doesn’t have a copy of the functions,
+//instead when called it will go up the prototype chain for these methods.
+//Then I extended the character class to create jobs (warrior, black mage and cleric), these have their own base stats and different growth,
+//also they have different skills that use their own stats. At the end, there is a simulation of a skirmish.
+
 class Character {
   constructor(name, level) {
     this.name = name;
