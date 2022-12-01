@@ -1,6 +1,6 @@
 const anchor = document.getElementById("id1");
-const div = Array.from(document.getElementsByTagName("div"));
+const div = document.querySelector("div");
 
 anchor.addEventListener("click", (e) => {
-  div[0].style.display = "block";
+  div.style.display = "block";
 });

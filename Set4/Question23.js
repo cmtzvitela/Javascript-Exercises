@@ -4,19 +4,19 @@ function getRandomNumber() {
   const c = 17;
 
   let z = 3;
-  return function (max) {
+  return function (min, max) {
     z = (a * z + c) % m;
-    return Math.floor((z / m) * max);
+    return Math.floor(min + (z / m) * max);
   };
 }
 
 const random = getRandomNumber();
 
-console.log(random(45));
-console.log(random(45));
-console.log(random(45));
-console.log(random(45));
-console.log(random(45));
-console.log(random(45));
-console.log(random(45));
-console.log(random(45));
+console.log(random(2, 45));
+console.log(random(2, 45));
+console.log(random(2, 45));
+console.log(random(2, 45));
+console.log(random(2, 45));
+console.log(random(2, 45));
+console.log(random(2, 45));
+console.log(random(2, 45));
