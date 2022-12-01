@@ -10,10 +10,9 @@ let candidate = {
 };
 
 function addNames(candidate) {
-  const info = document.getElementsByClassName("info");
-  console.log("🚀 ~ info", info)
-  info[1].childNodes[3].textContent = candidate.name.firstname;
-  info[1].childNodes[4].textContent = candidate.printName();
+  const info = document.getElementById("body").firstElementChild;
+  info.firstElementChild.textContent = candidate.name.firstname;
+  info.lastElementChild.textContent = candidate.printName();
 }
 
 addNames(candidate);
