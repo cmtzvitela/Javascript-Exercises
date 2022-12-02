@@ -1,52 +1,21 @@
 let async = {
   getAll: function (urlArray, callback) {
-    Promise.all(urlArray).then(callback);
+    return Promise.all(
+      urlArray.map((url) =>
+        fetch(url)
+          .then((response) => response.json())
+          .then(callback())
+      )
+    );
   },
 };
-
-function getSomething1() {
-  const http = new XMLHttpRequest();
-  const url = "http://example.com";
-
-  http.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-    }
-  };
-  http.open("GET", url);
-  http.send();
-}
-
-function getSomething2() {
-  const http = new XMLHttpRequest();
-  const url = "http://example.com";
-
-  http.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-    }
-  };
-  http.open("GET", url);
-  http.send();
-}
-
-function getSomething3() {
-  const http = new XMLHttpRequest();
-  const url = "http://example.com";
-
-  http.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-    }
-  };
-  http.open("GET", url);
-  http.send();
-}
+const urlArray = ["http://example.com", "http://example2.com", "http://example3.com"];
 
 function printToTheConsole(...values) {
-  values.forEach((element) => {
-    console.log(element);
-  });
+  const promiseObject = {};
+  for (let i = 0; i < values.length; i++) {
+    promiseObject[i] = values[i];
+  }
 }
 
-async.getAll([getSomething1, getSomething2, getSomething3], printToTheConsole);
+async.getAll(urlArray, printToTheConsole);
