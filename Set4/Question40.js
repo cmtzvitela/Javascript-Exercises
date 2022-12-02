@@ -1,13 +1,13 @@
 const arr = [3, 2, 1, 0, -3, 2, 2, -2];
-var n = arr.length;
 
-function findTriplets(arr, n) {
-  var found = false;
+function findTriplets(arr) {
+  const n = arr.length;
+  let found = false;
 
-  for (var i = 0; i < n - 1; i++) {
-    var s = new Set();
-    for (var j = i + 1; j < n; j++) {
-      var x = -(arr[i] + arr[j]);
+  for (let i = 0; i < n - 1; i++) {
+    let s = new Set();
+    for (let j = i + 1; j < n; j++) {
+      let x = -(arr[i] + arr[j]);
       if (s.has(x)) {
         found = true;
         console.log(`[${x}, ${arr[i]}, ${arr[j]}]`);
@@ -18,4 +18,4 @@ function findTriplets(arr, n) {
   if (found == false) document.write(" No Triplet Found");
 }
 
-findTriplets(arr, n);
+findTriplets(arr);

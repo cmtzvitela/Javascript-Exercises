@@ -1,22 +1,19 @@
 const numberArray = [0, 3, 5, 0, 8, 0, 16, 2, 0];
 
-function zerosToTheRight(array) {
-  let counter = 0;
-  array.forEach((element) => {
-    if (element === 0) {
-      counter++;
-    }
-  });
-  for (let j = counter; j <= array.length - counter && j > 0; j--) {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] === 0 && array[i + 1] > 0) {
-        let temp = array[i];
-        array[i] = array[i + 1];
-        array[i + 1] = temp;
-      }
+function zerosToTheRight(arr) {
+  let n = arr.length;
+  let count = 0;
+
+  for (let i = 0; i < n; i++) {
+    if (arr[i] != 0) {
+      arr[count++] = arr[i];
     }
   }
-  return array;
+
+  while (count < n) {
+    arr[count++] = 0;
+  }
+  return arr;
 }
 
 console.log(zerosToTheRight(numberArray));
