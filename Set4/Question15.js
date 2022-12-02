@@ -1,3 +1,8 @@
+
+// var foo = (function () { /* … */ })();
+// foo.bar();
+// foo.test();
+
 let foo = function () {
   private = function () {
     return "This is private";

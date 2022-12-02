@@ -8,10 +8,12 @@ function sortTable() {
   while (switching) {
     switching = false;
     rows = table.rows;
+    console.log("🚀 ~ rows", rows);
     for (i = 1; i < rows.length - 1; i++) {
       shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
+      x = rows[i].getElementsByTagName("TD")[1];
+      console.log("🚀 ~ x", x);
+      y = rows[i + 1].getElementsByTagName("TD")[1];
       if (x.textContent > y.textContent) {
         shouldSwitch = true;
         break;
