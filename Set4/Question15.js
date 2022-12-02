@@ -1,17 +1,14 @@
-
-// var foo = (function () { /* … */ })();
-// foo.bar();
-// foo.test();
-
-let foo = function () {
-  private = function () {
+var foo = function () {
+  function privateFunction() {
     return "This is private";
-  };
-  this.bar = function () {
-    return "This is bar";
-  };
-  this.test = function () {
-    return "This is a test";
+  }
+  return {
+    bar() {
+      return "This is bar";
+    },
+    test() {
+      return "This is a test";
+    },
   };
 };
 
