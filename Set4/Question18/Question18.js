@@ -39,30 +39,45 @@ let candidates = [
 const template = document.getElementById("candidates");
 const tableContent = document.getElementById("table-content");
 const addButton = document.getElementById("add-button");
-const genCan = generateCandidate(candidates);
-addButton.addEventListener("click", addCandidate);
+addButton.addEventListener("click", addNewCandidate);
 
-function addCandidate() {
-  const candidate = genCan.next().value;
-  const clonedTemplate = template.content.cloneNode(true);
-  const name = clonedTemplate.getElementById("name");
-  name.textContent = candidate.name.firstName;
-  const lastName = clonedTemplate.getElementById("last-name");
-  lastName.textContent = candidate.name.lastName;
-  const phone = clonedTemplate.getElementById("phone");
-  phone.textContent = candidate.name.phone;
-  tableContent.appendChild(clonedTemplate);
-  deleteCandidate();
-  editCandidate();
-}
-
-function* generateCandidate(candidateArray) {
-  for (let i = 0; i < candidateArray.length; i++) {
-    yield candidateArray[i];
+function addCandidates() {
+  //const candidate = genCan.next().value;
+  for (let i = 0; i < candidates.length; i++) {
+    const clonedTemplate = template.content.cloneNode(true);
+    const tr = clonedTemplate.getElementById("table-row");
+    tr.setAttribute("name", [i]);
+    const name = clonedTemplate.getElementById("name");
+    name.textContent = candidates[i].name.firstName;
+    const lastName = clonedTemplate.getElementById("last-name");
+    lastName.textContent = candidates[i].name.lastName;
+    const phone = clonedTemplate.getElementById("phone");
+    phone.textContent = candidates[i].name.phone;
+    tableContent.appendChild(clonedTemplate);
   }
-  return alert("There are no more candidates to load");
+  deleteCandidate();
+  editOrDelete();
 }
 
+addCandidates();
+
+function addNewCandidate() {
+  const firstName = window.prompt("Write the candidate's name");
+  console.log(firstName);
+  const lastName = window.prompt("Write the candidate's last name");
+  const phone = window.prompt("Write the candidate's phone number");
+  if ((firstName !== null) & (lastName !== null) & (phone !== null)) {
+    candidates.push({ name: { firstName, lastName, phone } });
+  }
+  cleanTable();
+  addCandidates();
+}
+
+function cleanTable() {
+  while (tableContent.childElementCount > 2) {
+    tableContent.removeChild(tableContent.lastChild);
+  }
+}
 function deleteCandidate() {
   const deleteCan = Array.from(document.getElementsByClassName("delete"));
   deleteCan.forEach((element) => {
@@ -71,58 +86,66 @@ function deleteCandidate() {
     });
   });
 }
-function editCandidate() {
-  const editCan = Array.from(document.getElementsByClassName("edit"));
-  console.log("🚀 ~ editCan", editCan);
+
+function editOrDelete() {
+  const editCan = Array.from(document.getElementsByTagName("tr"));
   editCan.forEach((element) => {
     element.addEventListener(
       "click",
       (e) => {
-        alert("Window to edit");
+        console.log(e.currentTarget.children);
+        if (e.target.id == "edit") {
+          const tr = Array.from(e.currentTarget.children);
+          const firstName = window.prompt("Write the candidate's name");
+          const lastName = window.prompt("Write the candidate's last name");
+          const phone = window.prompt("Write the candidate's phone number");
+          tr[0].textContent = firstName;
+          tr[1].textContent = lastName;
+          tr[2].textContent = phone;
+          candidates[e.currentTarget.getAttribute("name")] = { name: { firstName, lastName, phone } };
+        } else if (e.target.id == "delete") {
+          remove(e.currentTarget);
+        }
       },
       false
     );
   });
 }
 
-const httpRequest = new XMLHttpRequest();
-const url = "http://www.getcandidates.com";
-
 function getInfo() {
-  httpRequest.onload = function () {
-    console.log(this.response);
-  };
-  httpRequest.open("GET", url);
-  httpRequest.send();
+  fetch("http://candidates.com/database").then((response) =>
+    response.json().then((data) => {
+      return data;
+    })
+  );
 }
 
 function postCandidate(candidateObj) {
-  const data = JSON.stringify(candidateObj);
-  httpRequest.open("POST", url, true);
-  httpRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  httpRequest.send(data);
-
-  httpRequest.onload = function () {
-    if (httpRequest.status === 201) {
-      console.log("Post successfully created!");
-    }
-  };
+  fetch("http://candidates.com/database", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(candidateObj),
+  }).then((res) => res.json());
 }
 
 function deleteCandidateFromServer(name) {
-  httpRequest.open("DELETE", url);
-  httpRequest.send(name);
+  fetch(`http://candidates.com/database/${name}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((res) => console.log(res));
 }
 
 function editCandidateOnServer(candidateObj) {
-  const data = JSON.stringify(candidateObj);
-  httpRequest.open("PUT", url, true);
-  httpRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  httpRequest.send(data);
-
-  httpRequest.onload = function () {
-    if (httpRequest.status === 201) {
-      console.log("Post successfully edited!");
-    }
-  };
+  fetch(`http://candidates.com/database/${candidateObj.name}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(candidateObj),
+  })
+    .then((res) => res.json())
+    .then((res) => console.log(res));
 }
