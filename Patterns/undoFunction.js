@@ -1,10 +1,10 @@
-import { createNote, deleteNote, editNote, getAllNotes } from "./noteFunctions.js";
-import { displayNotes, blurNote, dragNote, addTrash } from "./noteView.js";
+import { createNote, deleteNote, editNote, getAllNotes } from './noteFunctions.js';
+import { displayNotes, blurNote, dragNote, addTrash } from './noteView.js';
 
-const NOTEEDIT = "NOTEEDIT";
-const NOTECREATION = "NOTECREATION";
-const NOTEDELETION = "NOTEDELETION";
-const NOTEDRAG = "NOTEDRAG";
+const NOTEEDIT = 'NOTEEDIT';
+const NOTECREATION = 'NOTECREATION';
+const NOTEDELETION = 'NOTEDELETION';
+const NOTEDRAG = 'NOTEDRAG';
 
 const commandEdit = (noteToEdit) => {
   const notes = getAllNotes();
@@ -19,7 +19,7 @@ const commandEdit = (noteToEdit) => {
     undo() {
       editNote({ id: noteID, title: previousTitle, body: previousBody });
       const refreshNotes = getAllNotes();
-      const noteSection = document.getElementById("note-space");
+      const noteSection = document.getElementById('note-space');
       while (noteSection.firstChild) {
         noteSection.removeChild(noteSection.firstChild);
       }
@@ -51,11 +51,11 @@ const commandDelete = (noteID) => {
       deleteNote(noteID);
     },
     undo() {
-      const notes = JSON.parse(localStorage.getItem("notes"));
+      const notes = JSON.parse(localStorage.getItem('notes'));
       notes.push(existing);
-      localStorage.setItem("notes", JSON.stringify(notes));
+      localStorage.setItem('notes', JSON.stringify(notes));
       const refreshNotes = getAllNotes();
-      const noteSection = document.getElementById("note-space");
+      const noteSection = document.getElementById('note-space');
       while (noteSection.firstChild) {
         noteSection.removeChild(noteSection.firstChild);
       }
@@ -73,7 +73,7 @@ const commandDrag = (dragArray) => {
       return;
     },
     undo() {
-      const noteSection = document.getElementById("note-space");
+      const noteSection = document.getElementById('note-space');
       while (noteSection.firstChild) {
         noteSection.removeChild(noteSection.firstChild);
       }
@@ -115,8 +115,10 @@ export const commandManager = (target) => {
 
     undo() {
       if (position > 0) {
-        const lastChange = history.pop();
-        lastChange.undo(target);
+        history[position].undo();
+        position -= 1;
+        // const lastChange = history.pop();
+        // lastChange.undo(target);
       }
     },
   };
