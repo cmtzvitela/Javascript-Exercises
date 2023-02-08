@@ -25,13 +25,6 @@ export function createNote() {
   const clonedTemplate = noteTemplate.content.cloneNode(true);
   const noteSection = document.getElementById('note-space');
   noteSection.appendChild(clonedTemplate);
-  const noteText = clonedTemplate.getElementById('note-text');
-  noteText.addEventListener('keydown', (e) => {
-    if (e.keyCode === 9) {
-      e.preventDefault();
-      noteText.setRangeText('\t ', noteText.selectionStart, noteText.selectionEnd, 'end');
-    }
-  });
   while (noteSection.firstChild) {
     noteSection.removeChild(noteSection.firstChild);
   }
@@ -57,7 +50,6 @@ export function deleteNote(noteID) {
 
 export function updatedDate(existingNote) {
   const noteToUpdate = document.getElementById(existingNote.id);
-  console.log('🚀 ~ noteToUpdate', noteToUpdate);
   const span = noteToUpdate.getElementsByTagName('span');
   const date = existingNote.updated;
   span.textContent = `Last updated ${date.toLocaleString()}`;
@@ -66,13 +58,13 @@ export function updatedDate(existingNote) {
 export function editNote(noteToEdit) {
   const notes = getAllNotes();
   const existing = notes.find((note) => note.id == noteToEdit.id);
+  console.log("🚀 ~ existing", existing)
   if (existing) {
     existing.title = noteToEdit.title;
     existing.body = noteToEdit.body;
     existing.updated = new Date();
     updatedDate(existing);
   }
-
   localStorage.setItem('notes', JSON.stringify(notes));
 }
 
