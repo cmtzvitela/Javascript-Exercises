@@ -1,17 +1,17 @@
 let candidate = {
   name: {
-    firstname: "John",
-    lastname: "Galt",
-    phone: "123-456-7890",
+    firstName: 'John',
+    lastName: 'Galt',
+    phone: '123-456-7890',
   },
   printName() {
-    return this.name.firstname + " " + this.name.lastname;
+    return this.name.firstName + ' ' + this.name.lastName;
   },
 };
 
 function addNames(candidate) {
-  const info = document.getElementById("body").firstElementChild;
-  info.firstElementChild.textContent = candidate.name.firstname;
+  const info = document.querySelector('#body .info');
+  info.firstElementChild.textContent = candidate.name.firstName;
   info.lastElementChild.textContent = candidate.printName();
 }
 

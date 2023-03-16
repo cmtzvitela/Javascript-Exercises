@@ -1,13 +1,18 @@
 var foo = function () {
   function privateFunction() {
-    return "This is private";
+    const num = 2;
+    return `This is private number ${num}`;
   }
+
   return {
+    somethingPrivate() {
+      return privateFunction();
+    },
     bar() {
-      return "This is bar";
+      return 'This is bar';
     },
     test() {
-      return "This is a test";
+      return 'This is a test';
     },
   };
 };
@@ -15,4 +20,4 @@ var foo = function () {
 let foo2 = new foo();
 console.log(foo2.test());
 console.log(foo2.bar());
-console.log(foo2.private());
+console.log(foo2.somethingPrivate());

@@ -3,12 +3,11 @@ String.prototype.exclamation = function () {
   return `${newString}!`;
 };
 
-console.log("hello".exclamation());
-console.log("hello world".exclamation());
+console.log('hello'.exclamation());
+console.log('hello world'.exclamation());
 
 function addNumbers(...num) {
-  const sum = num.reduce((previousValue, currentValue) => previousValue + currentValue, (initialValue = 0));
-  return sum;
+  return num.reduce((previousValue, currentValue) => previousValue + currentValue, (initialValue = 0));
 }
 
 console.log(addNumbers(3, 4, 5, 6));

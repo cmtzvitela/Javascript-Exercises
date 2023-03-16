@@ -1,4 +1,4 @@
-const numberArray = [0, 3, 5, 0, 8, 0, 16, 2, 0];
+const numberArray = [0, 3, 5, 0, 8, 0, 16, 2, 0, 9];
 
 function zerosToTheRight(arr) {
   let n = arr.length;

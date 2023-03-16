@@ -1,20 +1,20 @@
-const button = document.getElementById("button");
-button.addEventListener("click", sortTable);
+const button = document.getElementById('button');
+button.addEventListener('click', sortTable);
 
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementsByTagName("table")[0];
+  table = document.getElementsByTagName('table')[0];
   switching = true;
   while (switching) {
     switching = false;
     rows = table.rows;
-    console.log("🚀 ~ rows", rows);
+    console.log('🚀 ~ rows', rows);
     for (i = 1; i < rows.length - 1; i++) {
       shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[1];
-      console.log("🚀 ~ x", x);
-      y = rows[i + 1].getElementsByTagName("TD")[1];
-      if (x.textContent > y.textContent) {
+      x = rows[i].getElementsByTagName('TD')[1];
+      console.log('🚀 ~ x', x);
+      y = rows[i + 1].getElementsByTagName('TD')[1];
+      if (x.textContent * 1 > y.textContent * 1) {
         shouldSwitch = true;
         break;
       }
