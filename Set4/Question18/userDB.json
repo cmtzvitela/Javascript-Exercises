@@ -1,0 +1,36 @@
+{
+  "candidates": [
+    {
+      "id": 2,
+      "name": {
+        "firstName": "Samantha",
+        "lastName": "Jones",
+        "phone": "415-785-3025"
+      }
+    },
+    {
+      "id": 4,
+      "name": {
+        "firstName": "Miranda",
+        "lastName": "Hobes",
+        "phone": "360-258-9410"
+      }
+    },
+    {
+      "name": {
+        "firstName": "Charlotte ",
+        "lastName": "York",
+        "phone": "741-852-9632"
+      },
+      "id": 6
+    },
+    {
+      "name": {
+        "firstName": "Carrie",
+        "lastName": "Bradshaw",
+        "phone": "987-765-3456"
+      },
+      "id": 7
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "question18",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Question18.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch userDB.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.2"
+  }
+}

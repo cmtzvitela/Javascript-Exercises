@@ -1,76 +1,67 @@
-let candidates = [
-  {
-    name: {
-      firstName: "John",
-      lastName: "Galt",
-      phone: "123-456-7890",
-    },
-  },
-  {
-    name: {
-      firstName: "Carrie",
-      lastName: "Bradshaw",
-      phone: "985-632-1478",
-    },
-  },
-  {
-    name: {
-      firstName: "Samantha",
-      lastName: "Jones",
-      phone: "415-785-3025",
-    },
-  },
-  {
-    name: {
-      firstName: "Charlotte",
-      lastName: "York",
-      phone: "025-741-8946",
-    },
-  },
-  {
-    name: {
-      firstName: "Miranda",
-      lastName: "Hobbes",
-      phone: "360-258-9410",
-    },
-  },
-];
+const template = document.getElementById('candidates');
+const editTemplate = document.getElementById('edit-candidates');
+const tableContent = document.getElementById('table-content');
+const addButton = document.getElementById('add-button');
+addButton.addEventListener('click', addNewCandidate);
 
-const template = document.getElementById("candidates");
-const tableContent = document.getElementById("table-content");
-const addButton = document.getElementById("add-button");
-addButton.addEventListener("click", addNewCandidate);
+async function getCandidates() {
+  await fetch('http://localhost:3000/candidates')
+    .then((response) => response.json())
+    .then((candidates) => {
+      addCandidates(candidates);
+      deleteCandidate();
+    });
+}
 
-function addCandidates() {
-  //const candidate = genCan.next().value;
+getCandidates();
+
+tableContent.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log(e.target.parentNode.parentNode);
+  if (e.target.id == 'edit') {
+    editCandidate(e.target.parentNode.parentNode.getAttribute('name'));
+  }
+});
+
+function addCandidates(candidates) {
   for (let i = 0; i < candidates.length; i++) {
     const clonedTemplate = template.content.cloneNode(true);
-    const tr = clonedTemplate.getElementById("table-row");
-    tr.setAttribute("name", [i]);
-    const name = clonedTemplate.getElementById("name");
+    const tr = clonedTemplate.getElementById('table-row');
+    tr.setAttribute('name', candidates[i].id);
+    const name = clonedTemplate.getElementById('name');
     name.textContent = candidates[i].name.firstName;
-    const lastName = clonedTemplate.getElementById("last-name");
+    const lastName = clonedTemplate.getElementById('last-name');
     lastName.textContent = candidates[i].name.lastName;
-    const phone = clonedTemplate.getElementById("phone");
+    const phone = clonedTemplate.getElementById('phone');
     phone.textContent = candidates[i].name.phone;
     tableContent.appendChild(clonedTemplate);
   }
-  deleteCandidate();
-  editOrDelete();
 }
 
-addCandidates();
-
-function addNewCandidate() {
-  const firstName = window.prompt("Write the candidate's name");
-  console.log(firstName);
-  const lastName = window.prompt("Write the candidate's last name");
-  const phone = window.prompt("Write the candidate's phone number");
-  if ((firstName !== null) & (lastName !== null) & (phone !== null)) {
-    candidates.push({ name: { firstName, lastName, phone } });
-  }
-  cleanTable();
-  addCandidates();
+async function addNewCandidate() {
+  const clonedTemplate = editTemplate.content.cloneNode(true);
+  tableContent.appendChild(clonedTemplate);
+  const firstName = document.getElementById('input-first-name');
+  let firstNameInput = '';
+  firstName.oninput = (e) => {
+    firstNameInput = e.target.value;
+  };
+  const lastName = document.getElementById('input-last-name');
+  let lastNameInput = '';
+  lastName.oninput = (e) => {
+    lastNameInput = e.target.value;
+  };
+  const phone = document.getElementById('input-phone');
+  let phoneInput = '';
+  phone.oninput = (e) => {
+    phoneInput = e.target.value;
+  };
+  const button = document.getElementById('edit-button');
+  button.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const candidate = { name: { firstName: firstNameInput, lastName: lastNameInput, phone: phoneInput } };
+    postCandidate(candidate);
+  });
 }
 
 function cleanTable() {
@@ -78,73 +69,67 @@ function cleanTable() {
     tableContent.removeChild(tableContent.lastChild);
   }
 }
+
 function deleteCandidate() {
-  const deleteCan = Array.from(document.getElementsByClassName("delete"));
+  const deleteCan = Array.from(document.getElementsByClassName('delete'));
   deleteCan.forEach((element) => {
-    element.addEventListener("click", (e) => {
-      tableContent.removeChild(e.currentTarget.parentNode.parentNode);
+    element.addEventListener('click', async (e) => {
+      await deleteCandidateFromServer(e.currentTarget.parentNode.parentNode.getAttribute('name'));
+      cleanTable();
+      getCandidates();
     });
   });
 }
 
-function editOrDelete() {
-  const editCan = Array.from(document.getElementsByTagName("tr"));
-  editCan.forEach((element) => {
-    element.addEventListener(
-      "click",
-      (e) => {
-        console.log(e.currentTarget.children);
-        if (e.target.id == "edit") {
-          const tr = Array.from(e.currentTarget.children);
-          const firstName = window.prompt("Write the candidate's name");
-          const lastName = window.prompt("Write the candidate's last name");
-          const phone = window.prompt("Write the candidate's phone number");
-          tr[0].textContent = firstName;
-          tr[1].textContent = lastName;
-          tr[2].textContent = phone;
-          candidates[e.currentTarget.getAttribute("name")] = { name: { firstName, lastName, phone } };
-        } else if (e.target.id == "delete") {
-          remove(e.currentTarget);
-        }
-      },
-      false
-    );
+async function editCandidate(id) {
+  const clonedTemplate = editTemplate.content.cloneNode(true);
+  tableContent.appendChild(clonedTemplate);
+  const firstName = document.getElementById('input-first-name');
+  let firstNameInput = '';
+  firstName.oninput = (e) => {
+    firstNameInput = e.target.value;
+  };
+  const lastName = document.getElementById('input-last-name');
+  let lastNameInput = '';
+  lastName.oninput = (e) => {
+    lastNameInput = e.target.value;
+  };
+  const phone = document.getElementById('input-phone');
+  let phoneInput = '';
+  phone.oninput = (e) => {
+    phoneInput = e.target.value;
+  };
+  const button = document.getElementById('edit-button');
+  button.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const candidate = { name: { firstName: firstNameInput, lastName: lastNameInput, phone: phoneInput } };
+    await editCandidateOnServer(id, candidate);
   });
 }
 
-function getInfo() {
-  fetch("http://candidates.com/database").then((response) =>
-    response.json().then((data) => {
-      return data;
-    })
-  );
-}
-
-function postCandidate(candidateObj) {
-  fetch("http://candidates.com/database", {
+async function postCandidate(candidate) {
+  await fetch('http://localhost:3000/candidates', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-type': 'application/json',
     },
-    method: "POST",
-    body: JSON.stringify(candidateObj),
+    body: JSON.stringify(candidate),
   }).then((res) => res.json());
 }
 
-function deleteCandidateFromServer(name) {
-  fetch(`http://candidates.com/database/${name}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .then((res) => console.log(res));
+async function deleteCandidateFromServer(name) {
+  await fetch(`http://localhost:3000/candidates/${name}`, {
+    method: 'DELETE',
+  });
 }
 
-function editCandidateOnServer(candidateObj) {
-  fetch(`http://candidates.com/database/${candidateObj.name}`, {
-    method: "PUT",
+function editCandidateOnServer(id, candidate) {
+  fetch(`http://localhost:3000/candidates/${id}`, {
+    method: 'PATCH',
     headers: {
-      "Content-type": "application/json",
+      'Content-type': 'application/json',
     },
-    body: JSON.stringify(candidateObj),
+    body: JSON.stringify(candidate),
   })
     .then((res) => res.json())
     .then((res) => console.log(res));
