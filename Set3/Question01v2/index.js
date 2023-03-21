@@ -7,14 +7,13 @@ const noteFunctions = {
     });
   },
 
-  displayNotes() {
-    const notes = this.getAllNotes();
-    const noteTemplate = document.getElementById('new-note');
-    const noteSection = document.getElementById('note-space');
-    notes.forEach((note) => {
+  displayNotes(noteArray = []) {
+    noteArray.forEach((note) => {
+      const noteTemplate = document.getElementById('new-note');
       const clonedTemplate = noteTemplate.content.cloneNode(true);
       const noteDiv = clonedTemplate.getElementById('note-body');
       noteDiv.id = `${note.id}`;
+      const noteSection = document.getElementById('note-space');
       const noteTitle = clonedTemplate.getElementById('note-title');
       noteTitle.value = `${note.title}`;
       const noteText = clonedTemplate.getElementById('note-text');
@@ -42,7 +41,7 @@ const noteFunctions = {
     while (noteSection.firstChild) {
       noteSection.removeChild(noteSection.firstChild);
     }
-    this.displayNotes();
+    this.displayNotes(this.getAllNotes());
     this.addTrash();
   },
   updatedDate(existingNote) {
@@ -100,14 +99,11 @@ const noteFunctions = {
     const noteTemplate = document.getElementById('new-note');
     const clonedTemplate = noteTemplate.content.cloneNode(true);
     const noteSection = document.getElementById('note-space');
-    const noteText = clonedTemplate.getElementById('note-text');
-    noteText.addEventListener('keydown', (e) => {
-      if (e.keyCode === 9) {
-        e.preventDefault();
-        noteText.setRangeText('\t ', noteText.selectionStart, noteText.selectionEnd, 'end');
-      }
-    });
     noteSection.appendChild(clonedTemplate);
+    while (noteSection.firstChild) {
+      noteSection.removeChild(noteSection.firstChild);
+    }
+    this.displayNotes(this.getAllNotes());
     this.addTrash();
     this.blurNote();
   },
@@ -126,7 +122,7 @@ const noteFunctions = {
   },
 };
 
-noteFunctions.displayNotes();
+noteFunctions.displayNotes(noteFunctions.getAllNotes());
 const createNoteButton = document.getElementById('create-note-button');
 createNoteButton.addEventListener('click', () => {
   noteFunctions.createNote();
