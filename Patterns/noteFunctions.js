@@ -2,10 +2,12 @@ import { displayNotes, addTrash, blurNote, dragNote } from './noteView.js';
 
 export function getAllNotes() {
   const notes = JSON.parse(localStorage.getItem('notes') || '[]');
-  return notes;
-  // return notes.sort((a, b) => {
-  //   return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
-  // });
+  if (localStorage.getItem('noteOrder')) {
+    return notes;
+  }
+  return notes.sort((a, b) => {
+    return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
+  });
 }
 
 export function createNote() {
@@ -58,7 +60,7 @@ export function updatedDate(existingNote) {
 export function editNote(noteToEdit) {
   const notes = getAllNotes();
   const existing = notes.find((note) => note.id == noteToEdit.id);
-  console.log("🚀 ~ existing", existing)
+  console.log('🚀 ~ existing', existing);
   if (existing) {
     existing.title = noteToEdit.title;
     existing.body = noteToEdit.body;

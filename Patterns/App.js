@@ -18,10 +18,6 @@ searchInput.addEventListener('change', (e) => {
   searchNote(searchTerm);
 });
 
-addTrash();
-blurNote();
-dragNote();
-
 const noteSection = document.getElementById('note-space');
 let sort = new Sortable(noteSection, {
   group: 'noteOrder',
@@ -32,7 +28,7 @@ let sort = new Sortable(noteSection, {
       console.log('🚀 ~ order', order);
       return order ? order.split('|') : [];
     },
-    set: function (sortable) {
+    set: function set(sortable) {
       console.log('🚀 ~ sortable', sortable);
       var order = sortable.toArray();
       console.log('🚀 ~ order', order);
@@ -40,6 +36,9 @@ let sort = new Sortable(noteSection, {
     },
   },
 });
+addTrash();
+blurNote();
+dragNote();
 
 const undoButton = document.getElementById('undo-button');
 undoButton.addEventListener('click', (e) => {
