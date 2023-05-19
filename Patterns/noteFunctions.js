@@ -69,7 +69,7 @@ export function editNote(noteToEdit) {
     updatedDate(existing);
   }
   localStorage.setItem('notes', JSON.stringify(notes));
-  //sort.save();
+  sort.save();
 }
 
 export function searchNote(searchTerm) {
