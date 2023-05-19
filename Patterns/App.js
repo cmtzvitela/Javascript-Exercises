@@ -8,7 +8,6 @@ const createNoteButton = document.getElementById('create-note-button');
 createNoteButton.addEventListener('click', () => {
   const createNewNote = commandManager();
   createNewNote.doCommand('NOTECREATION');
-  //createNote();
 });
 
 const searchInput = document.getElementById('search');
@@ -19,19 +18,18 @@ searchInput.addEventListener('change', (e) => {
 });
 
 const noteSection = document.getElementById('note-space');
-let sort = new Sortable(noteSection, {
+export let sort = new Sortable(noteSection, {
   group: 'noteOrder',
+  onEnd: function (e) {
+    sort.save();
+  },
   store: {
     get: function (sortable) {
-      console.log('🚀 ~ sortable', sortable);
-      var order = localStorage.getItem(sortable.options.group.name);
-      console.log('🚀 ~ order', order);
+      let order = localStorage.getItem(sortable.options.group.name);
       return order ? order.split('|') : [];
     },
-    set: function set(sortable) {
-      console.log('🚀 ~ sortable', sortable);
-      var order = sortable.toArray();
-      console.log('🚀 ~ order', order);
+    set: function (sortable) {
+      let order = sortable.toArray();
       localStorage.setItem(sortable.options.group.name, order.join('|'));
     },
   },

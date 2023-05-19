@@ -1,3 +1,4 @@
+import { sort } from './App.js';
 import { displayNotes, addTrash, blurNote, dragNote } from './noteView.js';
 
 export function getAllNotes() {
@@ -5,9 +6,9 @@ export function getAllNotes() {
   if (localStorage.getItem('noteOrder')) {
     return notes;
   }
-  return notes.sort((a, b) => {
-    return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
-  });
+  // return notes.sort((a, b) => {
+  //   return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
+  // });
 }
 
 export function createNote() {
@@ -68,6 +69,7 @@ export function editNote(noteToEdit) {
     updatedDate(existing);
   }
   localStorage.setItem('notes', JSON.stringify(notes));
+  //sort.save();
 }
 
 export function searchNote(searchTerm) {

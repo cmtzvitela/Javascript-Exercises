@@ -1,22 +1,33 @@
 function getRandomNumber(min, max) {
-  const m = 25;
-  const a = 11;
-  const c = 17;
+  const m = Math.pow(2, 32);
+  const a = 1664525;
+  const c = 1013904223;
 
-  let z = 3;
+  let z = 42;
   return function () {
     z = (a * z + c) % m;
-    return Math.floor(min + (z / m) * max);
+    return min + (z / m) * max;
   };
 }
 
-const random = getRandomNumber(1, 50);
+const min = 1;
+const max = 50;
+const random = getRandomNumber(min, max);
 
-console.log(random());
-console.log(random());
-console.log(random());
-console.log(random());
-console.log(random());
-console.log(random());
-console.log(random());
-console.log(random());
+const arr = [];
+for (let i = min; i <= max; i++) {
+  arr.push(random());
+}
+//arr.sort((a, b) => a - b);
+console.log(arr);
+
+// const random = getRandomNumber(1, 50);
+
+// console.log(random());
+// console.log(random());
+// console.log(random());
+// console.log(random());
+// console.log(random());
+// console.log(random());
+// console.log(random());
+// console.log(random());

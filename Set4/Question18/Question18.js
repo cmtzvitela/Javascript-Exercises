@@ -4,8 +4,9 @@ const tableContent = document.getElementById('table-content');
 const addButton = document.getElementById('add-button');
 addButton.addEventListener('click', addNewCandidate);
 
+const API_URL = "http://localhost:3000/candidates"
 async function getCandidates() {
-  await fetch('http://localhost:3000/candidates')
+  await fetch(`${API_URL}`)
     .then((response) => response.json())
     .then((candidates) => {
       addCandidates(candidates);
@@ -108,7 +109,7 @@ async function editCandidate(id) {
 }
 
 async function postCandidate(candidate) {
-  await fetch('http://localhost:3000/candidates', {
+  await fetch(`${API_URL}`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
@@ -118,19 +119,20 @@ async function postCandidate(candidate) {
 }
 
 async function deleteCandidateFromServer(name) {
-  await fetch(`http://localhost:3000/candidates/${name}`, {
+  await fetch(`${API_URL}/${name}`, {
     method: 'DELETE',
   });
 }
 
-function editCandidateOnServer(id, candidate) {
-  fetch(`http://localhost:3000/candidates/${id}`, {
+async function editCandidateOnServer(id, candidate) {
+  const res = await fetch(`${API_URL}/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-type': 'application/json',
     },
     body: JSON.stringify(candidate),
-  })
-    .then((res) => res.json())
-    .then((res) => console.log(res));
+  });
+  const json = await res.json();
+  console.log(json);
 }
+

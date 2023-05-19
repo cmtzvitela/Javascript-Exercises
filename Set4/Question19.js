@@ -1,15 +1,3 @@
-// function matchingStrings(str1, str2) {
-//   for (let i = 0; i < str1.length; i++) {
-//     if (str1[i] != str2[i]) {
-//       if (str1[i] == '*' || str2[i] == '*') {
-//       } else {
-//         return false;
-//       }
-//     }
-//   }
-//   return true;
-// }
-
 function includesString(str1, str2) {
   const firstString = str1.split('');
   const secondString = str2.split('');
@@ -28,6 +16,7 @@ function includesString(str1, str2) {
   return newString;
 }
 console.log(includesString('Hello', 'Hello'));
+console.log(includesString('Hello', 'e*'))
 console.log(includesString('Hello', 'He*lo'));
 console.log(includesString('Hello', 'Helho'));
 console.log(includesString('Hello', 'Hell*'));
