@@ -1,24 +1,36 @@
-function includesString(str1, str2) {
-  const firstString = str1.split('');
-  const secondString = str2.split('');
+function includesString(input, pattern) {
+  const inputString = input.split('');
+  const patternString = pattern.split('');
   let newString = '';
-  for (let i = 0; i < firstString.length; i++) {
-    if (firstString[i] == '*' || secondString[i] == '*') {
-      newString += firstString[i];
-    } else {
-      if (firstString[i] == secondString[i]) {
-        newString += firstString[i];
-      } else {
-        return newString;
-      }
+  if (patternString.length > inputString.length) {
+    return null;
+  }
+  for (let i = 0; i < patternString.length; i++) {
+    if (patternString[i] == '*') {
+      newString += inputString[i];
+    } else if (inputString[i] == patternString[i]) {
+      newString += inputString[i];
     }
   }
+
   return newString;
 }
 console.log(includesString('Hello', 'Hello'));
-console.log(includesString('Hello', 'e*'))
-console.log(includesString('Hello', 'He*lo'));
+console.log(includesString('Hello', 'e*'));
+console.log(includesString('Hello', 'e*lo'));
 console.log(includesString('Hello', 'Helho'));
 console.log(includesString('Hello', 'Hell*'));
 console.log(includesString('Hello', '*ello'));
 console.log(includesString('Hello', 'Aello'));
+
+// for (let i = 0; i < inputString.length; i++) {
+//   if (inputString[i] == '*' || patternString[i] == '*') {
+//     newString += inputString[i];
+//   } else {
+//     if (inputString[i] == patternString[i]) {
+//       newString += inputString[i];
+//     } else {
+//       return newString;
+//     }
+//   }
+// }

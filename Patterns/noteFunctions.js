@@ -6,9 +6,9 @@ export function getAllNotes() {
   if (localStorage.getItem('noteOrder')) {
     return notes;
   }
-  // return notes.sort((a, b) => {
-  //   return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
-  // });
+  return notes.sort((a, b) => {
+    return new Date(a.updated) > new Date(b.updated) ? -1 : 1;
+  });
 }
 
 export function createNote() {

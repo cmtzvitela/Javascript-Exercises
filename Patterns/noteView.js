@@ -1,7 +1,7 @@
 import { editNote, getAllNotes } from './noteFunctions.js';
 import { commandManager } from './undoFunction.js';
 
-export function displayNotes(noteArray = []) {
+export function displayNotes(noteArray) {
   noteArray.forEach((note) => {
     const noteTemplate = document.getElementById('new-note');
     const clonedTemplate = noteTemplate.content.cloneNode(true);

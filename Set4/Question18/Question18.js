@@ -4,7 +4,7 @@ const tableContent = document.getElementById('table-content');
 const addButton = document.getElementById('add-button');
 addButton.addEventListener('click', addNewCandidate);
 
-const API_URL = "http://localhost:3000/candidates"
+const API_URL = 'http://localhost:3000/candidates';
 async function getCandidates() {
   await fetch(`${API_URL}`)
     .then((response) => response.json())
@@ -20,7 +20,12 @@ tableContent.addEventListener('click', (e) => {
   e.preventDefault();
   console.log(e.target.parentNode.parentNode);
   if (e.target.id == 'edit') {
-    editCandidate(e.target.parentNode.parentNode.getAttribute('name'));
+    const clonedTemplate = editTemplate.content.cloneNode(true);
+    const rowID = e.target.parentNode.parentNode.getAttribute('name');
+    const row = document.getElementsByName(rowID)['0'];
+    console.log('🚀 ~ row:', row);
+    tableContent.replaceChild(clonedTemplate, row);
+    editCandidate(rowID);
   }
 });
 
@@ -83,8 +88,8 @@ function deleteCandidate() {
 }
 
 async function editCandidate(id) {
-  const clonedTemplate = editTemplate.content.cloneNode(true);
-  tableContent.appendChild(clonedTemplate);
+  // const clonedTemplate = editTemplate.content.cloneNode(true);
+  // tableContent.appendChild(clonedTemplate);
   const firstName = document.getElementById('input-first-name');
   let firstNameInput = '';
   firstName.oninput = (e) => {
@@ -135,4 +140,3 @@ async function editCandidateOnServer(id, candidate) {
   const json = await res.json();
   console.log(json);
 }
-

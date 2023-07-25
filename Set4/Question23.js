@@ -6,7 +6,7 @@ function getRandomNumber(min, max) {
   let z = 42;
   return function () {
     z = (a * z + c) % m;
-    return min + (z / m) * max;
+    return Math.trunc(min + (z / m) * max);
   };
 }
 
@@ -20,14 +20,3 @@ for (let i = min; i <= max; i++) {
 }
 //arr.sort((a, b) => a - b);
 console.log(arr);
-
-// const random = getRandomNumber(1, 50);
-
-// console.log(random());
-// console.log(random());
-// console.log(random());
-// console.log(random());
-// console.log(random());
-// console.log(random());
-// console.log(random());
-// console.log(random());
