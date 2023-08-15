@@ -24,8 +24,11 @@ tableContent.addEventListener('click', (e) => {
     const rowID = e.target.parentNode.parentNode.getAttribute('name');
     const row = document.getElementsByName(rowID)['0'];
     console.log('🚀 ~ row:', row);
+    const firstName = row.firstElementChild.innerText;
+    const lastName = row.firstElementChild.nextElementSibling.innerText;
+    const phone = row.lastElementChild.previousElementSibling.innerText;
     tableContent.replaceChild(clonedTemplate, row);
-    editCandidate(rowID);
+    editCandidate(rowID, firstName, lastName, phone);
   }
 });
 
@@ -87,21 +90,22 @@ function deleteCandidate() {
   });
 }
 
-async function editCandidate(id) {
-  // const clonedTemplate = editTemplate.content.cloneNode(true);
-  // tableContent.appendChild(clonedTemplate);
+async function editCandidate(id, name, secondName, previousPhone) {
   const firstName = document.getElementById('input-first-name');
-  let firstNameInput = '';
+  firstName.value = name;
+  let firstNameInput = name;
   firstName.oninput = (e) => {
     firstNameInput = e.target.value;
   };
   const lastName = document.getElementById('input-last-name');
-  let lastNameInput = '';
+  lastName.value = secondName;
+  let lastNameInput = secondName;
   lastName.oninput = (e) => {
     lastNameInput = e.target.value;
   };
   const phone = document.getElementById('input-phone');
-  let phoneInput = '';
+  phone.value = previousPhone;
+  let phoneInput = previousPhone;
   phone.oninput = (e) => {
     phoneInput = e.target.value;
   };
